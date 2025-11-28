@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 type Problem = {
   id: number;
@@ -16,7 +16,6 @@ export default function MathRocketDefender() {
   const [input, setInput] = useState("");
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   // Generate a random problem
   const generateProblem = () => {
@@ -46,7 +45,7 @@ export default function MathRocketDefender() {
       setProblems((prev) => [...prev, generateProblem()]);
     }, 2000);
     return () => clearInterval(interval);
-  }, [gameStarted, operation]);
+  }, [gameStarted, operation, generateProblem]);
 
   // Move problems down
   useEffect(() => {
@@ -78,7 +77,7 @@ export default function MathRocketDefender() {
     }
     if (num === active.answer) {
       // correct
-      setScore((s) => s + 1);
+      setScore((s: number) => s + 1);
       setProblems((prev) => prev.filter((p) => p.id !== active.id));
     } else {
       // incorrect: shake input

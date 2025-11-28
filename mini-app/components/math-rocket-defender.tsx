@@ -45,7 +45,10 @@ export default function MathRocketDefender() {
   useEffect(() => {
     if (!gameStarted) return;
     const interval = setInterval(() => {
-      setProblems((prev) => [...prev, generateProblem()]);
+      setProblems((prev) => [
+        ...prev.map((p) => ({ ...p, active: false })),
+        generateProblem(),
+      ]);
     }, 2000);
     return () => clearInterval(interval);
   }, [gameStarted, operation, generateProblem]);
@@ -158,12 +161,12 @@ export default function MathRocketDefender() {
       </form>
 
       {/* Score */}
-      <div className="absolute top-4 left-4 text-xl">
+      <div className="absolute top-4 left-4 text-xl text-orange-400">
         Score: {score}
       </div>
 
       {/* Lives */}
-      <div className="absolute top-4 right-4 text-xl">
+      <div className="absolute top-4 right-4 text-xl text-red-500">
         Lives: {lives}
       </div>
 

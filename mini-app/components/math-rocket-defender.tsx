@@ -60,9 +60,9 @@ export default function MathRocketDefender() {
     const animation = () => {
       setProblems((prev) =>
         prev
-          .map((p) => ({ ...p, y: p.y + 2 }))
+          .map((p) => ({ ...p, y: p.y + Math.floor(window.innerHeight * 0.002) }))
           .filter((p) => {
-            if (p.y >= 600) {
+            if (p.y >= Math.floor(window.innerHeight * 0.8)) {
               // Problem hit the rocket
               setLives((l) => {
                 const newLives = l - 1;

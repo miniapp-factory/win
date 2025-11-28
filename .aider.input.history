@@ -642,3 +642,25 @@
 +Scale problem movement speed based on viewport height.
 +
 +Ensure problems consistently reach the rocket and remain interactive on any screen size.
+
+# 2025-11-28 16:52:28.151140
++I need to fix the problem highlighting bug in MathRocketDefender. Currently, the color change logic incorrectly marks the
++  next problem as active (orange) before the current active problem has reached the rocket. The highlighting should only
++  switch to the next problem when the current active problem either:
++   1. Is answered correctly and removed from the game, OR
++   2. Reaches the bottom (rocket) and is removed due to a missed answer
++
++  The current logic appears to be based on position or timing rather than the actual state of the active problem. The color
++  highlighting should be tied to which problem the player should be focusing on for answering, not just the next one in the
++  queue
+
+# 2025-11-28 16:52:28.152387
++I need to fix the problem highlighting bug in MathRocketDefender. Currently, the color change logic incorrectly marks the
++  next problem as active (orange) before the current active problem has reached the rocket. The highlighting should only
++  switch to the next problem when the current active problem either:
++   1. Is answered correctly and removed from the game, OR
++   2. Reaches the bottom (rocket) and is removed due to a missed answer
++
++  The current logic appears to be based on position or timing rather than the actual state of the active problem. The color
++  highlighting should be tied to which problem the player should be focusing on for answering, not just the next one in the
++  queue

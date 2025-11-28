@@ -62,3 +62,29 @@
 +    };
 +  }, [operation]); // <-- THIS was missing
 +
+
+# 2025-11-28 12:40:02.177334
++Fix the component so it has valid React syntax. Specifically, the generateProblem function must use useCallback correctly. Close the useCallback wrapper and add a dependency array.
++
++Correct structure should be:
++
++const generateProblem = useCallback(() => {
++  // logic here
++  return { ... };
++}, [operation]);
++
++Make sure there is no hanging "};" without the closing parenthesis. Ensure the file compiles with no syntax errors. Do not leave any unclosed hooks or components.
++
+
+# 2025-11-28 12:40:02.177746
++Fix the component so it has valid React syntax. Specifically, the generateProblem function must use useCallback correctly. Close the useCallback wrapper and add a dependency array.
++
++Correct structure should be:
++
++const generateProblem = useCallback(() => {
++  // logic here
++  return { ... };
++}, [operation]);
++
++Make sure there is no hanging "};" without the closing parenthesis. Ensure the file compiles with no syntax errors. Do not leave any unclosed hooks or components.
++

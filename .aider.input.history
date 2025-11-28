@@ -18,3 +18,47 @@
 +```
 +
 +Generate an app logo and update the app metadata title and description.
+
+# 2025-11-28 12:23:36.102338
++  // Generate a random problem
++  const generateProblem = useCallback(() => {
++    const ops = operation === "all" ? ["+", "-", "*", "/"] : [operation];
++    const op = ops[Math.floor(Math.random() * ops.length)];
++    let a = Math.floor(Math.random() * 10) + 1;
++    let b = Math.floor(Math.random() * 10) + 1;
++    if (op === "/") {
++      a = a * b; // ensure integer division
++    }
++    const value = `${a} ${op} ${b}`;
++    const answer = eval(value);
++    return {
++      id: Date.now() + Math.random(),
++      value,
++      answer,
++      y: -50,
++      active: true,
++    };
++  }, [operation]); // <-- THIS was missing
++
+
+# 2025-11-28 12:23:36.103305
++  // Generate a random problem
++  const generateProblem = useCallback(() => {
++    const ops = operation === "all" ? ["+", "-", "*", "/"] : [operation];
++    const op = ops[Math.floor(Math.random() * ops.length)];
++    let a = Math.floor(Math.random() * 10) + 1;
++    let b = Math.floor(Math.random() * 10) + 1;
++    if (op === "/") {
++      a = a * b; // ensure integer division
++    }
++    const value = `${a} ${op} ${b}`;
++    const answer = eval(value);
++    return {
++      id: Date.now() + Math.random(),
++      value,
++      answer,
++      y: -50,
++      active: true,
++    };
++  }, [operation]); // <-- THIS was missing
++

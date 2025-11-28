@@ -196,6 +196,7 @@ export default function MathRocketDefender() {
       {/* Game Over overlay */}
       {gameOver && (
         <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 text-red-500 text-3xl font-bold">
+          <div className="mb-4">Score: {score}</div>
           Game Over
           <button
             className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"

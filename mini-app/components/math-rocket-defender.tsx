@@ -77,7 +77,7 @@ export default function MathRocketDefender() {
     }
     if (num === active.answer) {
       // correct
-      setScore((s: number) => s + 1);
+      setScore((s) => s + 1);
       setProblems((prev) => prev.filter((p) => p.id !== active.id));
     } else {
       // incorrect: shake input

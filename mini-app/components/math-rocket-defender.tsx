@@ -17,6 +17,10 @@ export default function MathRocketDefender() {
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
 
+  // --- New states for lives & game over ---
+  const [lives, setLives] = useState(5);
+  const [gameOver, setGameOver] = useState(false);
+
   // Generate a random problem
   const generateProblem = useCallback(() => {
     const ops = operation === "all" ? ["+", "-", "*", "/"] : [operation];
@@ -24,7 +28,6 @@ export default function MathRocketDefender() {
     let a = Math.floor(Math.random() * 10) + 1;
     let b = Math.floor(Math.random() * 10) + 1;
     if (op === "/") {
-      // ensure integer division
       a = a * b;
     }
     const value = `${a} ${op} ${b}`;
@@ -54,7 +57,24 @@ export default function MathRocketDefender() {
       setProblems((prev) =>
         prev
           .map((p) => ({ ...p, y: p.y + 2 }))
-          .filter((p) => p.y < 600) // remove if too low
+          .filter((p) => {
+            if (p.y >= 600) {
+              // Problem hit the rocket
+              setLives((l) => {
+                const newLives = l - 1;
+                if (newLives <= 0) {
+                  setGameOver(true);
+                  setGameStarted(false);
+                  setProblems([]);
+                  setScore(0);
+                  return 5; // reset lives on game over
+                }
+                return newLives;
+              });
+              return false; // remove problem
+            }
+            return true;
+          })
       );
       requestAnimationFrame(animation);
     };
@@ -94,6 +114,7 @@ export default function MathRocketDefender() {
     <div className="relative w-full h-[80vh] bg-black text-white overflow-hidden">
       {/* Space background */}
       <div className="absolute inset-0 bg-gradient-to-b from-indigo-900 to-black"></div>
+
       {/* Rocket */}
       <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
         <svg
@@ -107,6 +128,7 @@ export default function MathRocketDefender() {
           <rect x="20" y="60" width="10" height="20" fill="gray" />
         </svg>
       </div>
+
       {/* Problems */}
       {problems.map((p) => (
         <div
@@ -119,6 +141,7 @@ export default function MathRocketDefender() {
           {p.value}
         </div>
       ))}
+
       {/* Input */}
       <form
         onSubmit={handleSubmit}
@@ -133,12 +156,19 @@ export default function MathRocketDefender() {
           className="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-blue-500"
         />
       </form>
+
       {/* Score */}
       <div className="absolute top-4 left-4 text-xl">
         Score: {score}
       </div>
-      {/* Start button */}
-      {!gameStarted && (
+
+      {/* Lives */}
+      <div className="absolute top-4 right-4 text-xl">
+        Lives: {lives}
+      </div>
+
+      {/* Start button & operation selection */}
+      {!gameStarted && !gameOver && (
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <h1 className="text-4xl mb-4">Math Rocket Defender</h1>
           <select
@@ -162,6 +192,26 @@ export default function MathRocketDefender() {
           </button>
         </div>
       )}
+
+      {/* Game Over overlay */}
+      {gameOver && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 text-red-500 text-3xl font-bold">
+          Game Over
+          <button
+            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+            onClick={() => {
+              setGameStarted(true);
+              setGameOver(false);
+              setLives(5);
+              setProblems([]);
+              setScore(0);
+            }}
+          >
+            Restart
+          </button>
+        </div>
+      )}
+
       <style jsx>{`
         .shake {
           animation: shake 0.5s;

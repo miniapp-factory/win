@@ -67,7 +67,6 @@ export default function MathRocketDefender() {
                   setGameOver(true);
                   setGameStarted(false);
                   setProblems([]);
-                  setScore(0);
                   return 5; // reset lives on game over
                 }
                 return newLives;

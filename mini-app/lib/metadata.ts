@@ -1,3 +1,3 @@
-export const title = "Mini App Factory App";
-export const description = "This app was created by the Mini App Factory!";
+export const title = "Math Rocket Defender";
+export const description = "A fun 2D math game where you shoot rockets at falling math problems.";
 export const url = process.env.NEXT_PUBLIC_URL;

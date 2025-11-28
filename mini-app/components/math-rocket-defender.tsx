@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 type Problem = {
   id: number;
@@ -18,7 +18,7 @@ export default function MathRocketDefender() {
   const [gameStarted, setGameStarted] = useState(false);
 
   // Generate a random problem
-  const generateProblem = () => {
+  const generateProblem = useCallback(() => {
     const ops = operation === "all" ? ["+", "-", "*", "/"] : [operation];
     const op = ops[Math.floor(Math.random() * ops.length)];
     let a = Math.floor(Math.random() * 10) + 1;
@@ -144,7 +144,7 @@ export default function MathRocketDefender() {
           <select
             value={operation}
             onChange={(e) =>
-              setOperation(e.target.value as any)
+              setOperation(e.target.value as "+" | "-" | "*" | "/" | "all")
             }
             className="mb-4 p-2 rounded bg-gray-800 text-white border border-gray-600"
           >

@@ -594,3 +594,29 @@
 
 # 2025-11-28 15:46:57.841650
 +after losing all lives the score message together with the game over did not rendered the exact score points
+
+# 2025-11-28 16:12:16.940973
++I need to fix three issues in MathRocketDefender:
++
++   1. Problem display colors: Currently, all falling problems appear in orange (text-orange-400), but only the active problem
++      (the one that needs to be solved) should be orange while others should be white. Please adjust the color logic so that
++      only the active problem appears in orange (text-orange-400) and other problems appear in white (text-white).
++
++   2. Score color: Change the score display color from the default to orange (text-orange-400) so it appears more prominent
++      during gameplay. The score is currently displayed as 'Score: {score}' in the top-left corner.
++
++   3. Lives color: Change the lives display color from the default to red (text-red-500) so it appears more prominent during
++      gameplay. The lives are currently displayed as 'Lives: {lives}' in the top-right corner.
+
+# 2025-11-28 16:12:16.942269
++I need to fix three issues in MathRocketDefender:
++
++   1. Problem display colors: Currently, all falling problems appear in orange (text-orange-400), but only the active problem
++      (the one that needs to be solved) should be orange while others should be white. Please adjust the color logic so that
++      only the active problem appears in orange (text-orange-400) and other problems appear in white (text-white).
++
++   2. Score color: Change the score display color from the default to orange (text-orange-400) so it appears more prominent
++      during gameplay. The score is currently displayed as 'Score: {score}' in the top-left corner.
++
++   3. Lives color: Change the lives display color from the default to red (text-red-500) so it appears more prominent during
++      gameplay. The lives are currently displayed as 'Lives: {lives}' in the top-right corner.

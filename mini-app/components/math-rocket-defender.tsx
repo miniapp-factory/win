@@ -58,8 +58,8 @@ export default function MathRocketDefender() {
     if (!gameStarted) return;
     let animationFrameId: number;
     const animation = () => {
-      setProblems((prev) =>
-        prev
+      setProblems((prev) => {
+        const updated = prev
           .map((p) => ({ ...p, y: p.y + Math.floor(window.innerHeight * 0.002) }))
           .filter((p) => {
             if (p.y >= Math.floor(window.innerHeight * 0.8)) {
@@ -77,8 +77,12 @@ export default function MathRocketDefender() {
               return false; // remove problem
             }
             return true;
-          })
-      );
+          });
+        if (updated.length > 0) {
+          updated[0].active = true;
+        }
+        return updated;
+      });
       animationFrameId = requestAnimationFrame(animation);
     };
     animationFrameId = requestAnimationFrame(animation);
@@ -101,7 +105,13 @@ export default function MathRocketDefender() {
     if (num === active.answer) {
       // correct
       setScore((s) => s + 1);
-      setProblems((prev) => prev.filter((p) => p.id !== active.id));
+      setProblems((prev) => {
+        const newProblems = prev.filter((p) => p.id !== active.id);
+        if (newProblems.length > 0) {
+          newProblems[0].active = true;
+        }
+        return newProblems;
+      });
     } else {
       // incorrect: shake input
       const el = document.getElementById("answer-input");

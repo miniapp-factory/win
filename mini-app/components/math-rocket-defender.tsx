@@ -53,6 +53,7 @@ export default function MathRocketDefender() {
   // Move problems down
   useEffect(() => {
     if (!gameStarted) return;
+    let animationFrameId: number;
     const animation = () => {
       setProblems((prev) =>
         prev
@@ -76,10 +77,10 @@ export default function MathRocketDefender() {
             return true;
           })
       );
-      requestAnimationFrame(animation);
+      animationFrameId = requestAnimationFrame(animation);
     };
-    const raf = requestAnimationFrame(animation);
-    return () => cancelAnimationFrame(raf);
+    animationFrameId = requestAnimationFrame(animation);
+    return () => cancelAnimationFrame(animationFrameId);
   }, [gameStarted]);
 
   // Handle input submission

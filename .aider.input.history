@@ -620,3 +620,25 @@
 +
 +   3. Lives color: Change the lives display color from the default to red (text-red-500) so it appears more prominent during
 +      gameplay. The lives are currently displayed as 'Lives: {lives}' in the top-right corner.
+
+# 2025-11-28 16:25:07.271882
++Make MathRocketDefender fully responsive. Replace hardcoded values so falling problems reach the rocket correctly on any screen size:
++
++Use 80% of the viewport height instead of 600px for problem removal.
++
++Position the rocket at the bottom dynamically for all viewports.
++
++Scale problem movement speed based on viewport height.
++
++Ensure problems consistently reach the rocket and remain interactive on any screen size.
+
+# 2025-11-28 16:25:07.272391
++Make MathRocketDefender fully responsive. Replace hardcoded values so falling problems reach the rocket correctly on any screen size:
++
++Use 80% of the viewport height instead of 600px for problem removal.
++
++Position the rocket at the bottom dynamically for all viewports.
++
++Scale problem movement speed based on viewport height.
++
++Ensure problems consistently reach the rocket and remain interactive on any screen size.

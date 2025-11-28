@@ -36,7 +36,7 @@ export default function MathRocketDefender() {
       y: -50,
       active: true,
     };
-  };
+  }, [operation]);
 
   // Add new problem periodically
   useEffect(() => {

@@ -187,13 +187,13 @@ export default function MathRocketDefender() {
             setLives(5);
             setGameOver(false);
           }}
-          className="absolute top-4 left-4 text-white bg-transparent border border-white rounded px-2 py-1"
+          className="absolute top-4 left-4 z-10 text-white bg-transparent border border-white rounded px-2 py-1"
         >
           Back
         </button>
       )}
       {/* Score */}
-      <div className="absolute top-4 left-4 text-xl text-orange-400">
+      <div className="absolute top-4 left-24 text-xl text-orange-400">
         Score: {score}
       </div>
 

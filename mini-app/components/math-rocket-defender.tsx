@@ -144,16 +144,27 @@ export default function MathRocketDefender() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Outer body */}
-          <path d="M25 0 L0 80 H50 Z" fill="orange" />
-          {/* Inner nose cone */}
-          <path d="M25 20 L10 80 H40 Z" fill="darkorange" />
-          {/* Cabin */}
-          <rect x="15" y="5" width="20" height="10" fill="orange" />
-          {/* Window */}
-          <circle cx="25" cy="35" r="5" fill="lightblue" />
-          {/* Exhaust */}
-          <rect x="20" y="60" width="10" height="20" fill="gray" />
+          <!-- Outer body -->
+          <rect x="10" y="20" width="30" height="40" fill="orange" />
+          <!-- Fins -->
+          <polygon points="10,60 0,70 10,70" fill="turquoise" />
+          <polygon points="40,60 50,70 40,70" fill="turquoise" />
+          <!-- Orange circles on fins -->
+          <circle cx="5" cy="65" r="2" fill="orange" />
+          <circle cx="45" cy="65" r="2" fill="orange" />
+          <!-- Yellow star on side -->
+          <polygon points="25,35 27,40 32,40 28,43 30,48 25,45 20,48 22,43 18,40 23,40" fill="yellow" />
+          <!-- Red nose cone -->
+          <polygon points="25,0 15,20 35,20" fill="red" />
+          <!-- Blue oval window -->
+          <ellipse cx="25" cy="35" rx="5" ry="3" fill="blue" />
+          <!-- Fire -->
+          <path d="M25,70 Q20,75 25,80 Q30,75 25,70" fill="orange" />
+          <!-- Smoke -->
+          <ellipse cx="25" cy="75" rx="8" ry="3" fill="rgba(255,255,255,0.5)" />
+          <!-- Clouds -->
+          <ellipse cx="15" cy="70" rx="6" ry="3" fill="lightgray" />
+          <ellipse cx="35" cy="70" rx="6" ry="3" fill="lightgray" />
         </svg>
       </div>
 

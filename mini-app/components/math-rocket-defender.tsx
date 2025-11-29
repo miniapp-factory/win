@@ -144,15 +144,15 @@ export default function MathRocketDefender() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <!-- Outer body -->
+          {/* Outer body */}
           <path d="M25 0 L0 80 H50 Z" fill="orange" />
-          <!-- Inner nose cone -->
+          {/* Inner nose cone */}
           <path d="M25 20 L10 80 H40 Z" fill="darkorange" />
-          <!-- Cabin -->
+          {/* Cabin */}
           <rect x="15" y="5" width="20" height="10" fill="orange" />
-          <!-- Window -->
+          {/* Window */}
           <circle cx="25" cy="35" r="5" fill="lightblue" />
-          <!-- Exhaust -->
+          {/* Exhaust */}
           <rect x="20" y="60" width="10" height="20" fill="gray" />
         </svg>
       </div>

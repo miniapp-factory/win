@@ -664,3 +664,95 @@
 +  The current logic appears to be based on position or timing rather than the actual state of the active problem. The color
 +  highlighting should be tied to which problem the player should be focusing on for answering, not just the next one in the
 +  queue
+
+# 2025-11-29 00:22:51.866928
++Issue: Multiple problems showing as active (orange) instead of only the first one in queue.
++
++  Fix: Update the problem movement animation useEffect in math-rocket-defender.tsx:
++
++  Replace this section:
++
++    1 // Move problems down
++    2 useEffect(() => {
++    3   if (!gameStarted) return;
++    4   let animationFrameId: number;
++    5   const animation = () => {
++    6     setProblems((prev) => {
++    7       const updated = prev
++    8         .map((p) => ({ ...p, y: p.y + Math.floor(window.innerHeight * 0.002) }))
++    9         .filter((p) => {
++   10           if (p.y >= Math.floor(window.innerHeight * 0.8)) {
++   11             setLives((l) => {
++   12               const newLives = l - 1;
++   13               if (newLives <= 0) {
++   14                 setGameOver(true);
++   15                 setGameStarted(false);
++   16                 setProblems([]);
++   17                 return 5;
++   18               }
++   19               return newLives;
++   20             });
++   21             return false; // remove problem
++   22           }
++   23           return true;
++   24         });
++   25
++   26       // Mark only the first problem as active
++   27       return updated.map((p, index) => ({
++   28         ...p,
++   29         active: index === 0
++   30       }));
++   31     });
++   32     animationFrameId = requestAnimationFrame(animation);
++   33   };
++   34   animationFrameId = requestAnimationFrame(animation);
++   35   return () => cancelAnimationFrame(animationFrameId);
++   36 }, [gameStarted]);
++
++  Result: Only the first problem in queue will be active (orange), others remain white.
+
+# 2025-11-29 00:22:51.867411
++Issue: Multiple problems showing as active (orange) instead of only the first one in queue.
++
++  Fix: Update the problem movement animation useEffect in math-rocket-defender.tsx:
++
++  Replace this section:
++
++    1 // Move problems down
++    2 useEffect(() => {
++    3   if (!gameStarted) return;
++    4   let animationFrameId: number;
++    5   const animation = () => {
++    6     setProblems((prev) => {
++    7       const updated = prev
++    8         .map((p) => ({ ...p, y: p.y + Math.floor(window.innerHeight * 0.002) }))
++    9         .filter((p) => {
++   10           if (p.y >= Math.floor(window.innerHeight * 0.8)) {
++   11             setLives((l) => {
++   12               const newLives = l - 1;
++   13               if (newLives <= 0) {
++   14                 setGameOver(true);
++   15                 setGameStarted(false);
++   16                 setProblems([]);
++   17                 return 5;
++   18               }
++   19               return newLives;
++   20             });
++   21             return false; // remove problem
++   22           }
++   23           return true;
++   24         });
++   25
++   26       // Mark only the first problem as active
++   27       return updated.map((p, index) => ({
++   28         ...p,
++   29         active: index === 0
++   30       }));
++   31     });
++   32     animationFrameId = requestAnimationFrame(animation);
++   33   };
++   34   animationFrameId = requestAnimationFrame(animation);
++   35   return () => cancelAnimationFrame(animationFrameId);
++   36 }, [gameStarted]);
++
++  Result: Only the first problem in queue will be active (orange), others remain white.

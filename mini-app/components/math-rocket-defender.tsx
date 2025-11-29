@@ -212,12 +212,12 @@ export default function MathRocketDefender() {
         </button>
       )}
       {/* Score */}
-      <div className="absolute top-12 left-4 text-xl text-orange-400">
+      <div className="absolute top-12 right-4 text-xl text-orange-400">
         Score: {score}
       </div>
 
       {/* Lives */}
-      <div className="absolute top-12 right-4 text-xl text-red-500">
+      <div className="absolute top-12 left-4 text-xl text-red-500">
         Lives: {lives}
       </div>
 

@@ -205,7 +205,8 @@ export default function MathRocketDefender() {
       {/* Start button & operation selection */}
       {!gameStarted && !gameOver && (
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <h1 className="text-4xl mb-4">Math Rocket Defender</h1>
+          <h1 className="text-4xl mb-4">Math Blast</h1>
+          <label className="mb-2 text-lg">Choose your Operation</label>
           <select
             value={operation}
             onChange={(e) =>

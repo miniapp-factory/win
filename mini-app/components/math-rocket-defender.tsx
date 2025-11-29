@@ -230,7 +230,7 @@ export default function MathRocketDefender() {
 
       {/* Game Over overlay */}
       {gameOver && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 text-red-500 text-3xl font-bold">
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 text-orange-400 text-3xl font-bold">
           <div className="mb-4">Score: {score}</div>
           Game Over
           <button

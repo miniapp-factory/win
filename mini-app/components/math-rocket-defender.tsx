@@ -177,6 +177,21 @@ export default function MathRocketDefender() {
         />
       </form>
 
+      {/* Back button – visible only while the game is active */}
+      {gameStarted && !gameOver && (
+        <button
+          onClick={() => {
+            setGameStarted(false);
+            setProblems([]);
+            setScore(0);
+            setLives(5);
+            setGameOver(false);
+          }}
+          className="absolute top-4 left-4 text-white bg-transparent border border-white rounded px-2 py-1"
+        >
+          Back
+        </button>
+      )}
       {/* Score */}
       <div className="absolute top-4 left-4 text-xl text-orange-400">
         Score: {score}

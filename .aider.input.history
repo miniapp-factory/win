@@ -756,3 +756,103 @@
 +   36 }, [gameStarted]);
 +
 +  Result: Only the first problem in queue will be active (orange), others remain white.
+
+# 2025-11-29 00:30:45.424082
++   1. First, update the generateProblem function to initialize problems with active: false:
++
++    1 // Generate a random problem
++    2 const generateProblem = useCallback(() => {
++    3   const ops = operation === "all" ? ["+", "-", "*", "/"] : [operation];
++    4   const op = ops[Math.floor(Math.random() * ops.length)];
++    5   let a = Math.floor(Math.random() * 10) + 1;
++    6   let b = Math.floor(Math.random() * 10) + 1;
++    7   if (op === "/") {
++    8     a = a * b;
++    9   }
++   10   const value = `${a} ${op} ${b}`;
++   11   const answer = eval(value);
++   12   return {
++   13     id: Date.now() + Math.random(),
++   14     value,
++   15     answer,
++   16     y: -50,
++   17     active: false, // Changed from true to false
++   18   };
++   19 }, [operation]);
++
++   2. Then, update the problem adding effect to properly handle the active state:
++
++    1 // Add new problem periodically
++    2 useEffect(() => {
++    3   if (!gameStarted) return;
++    4   const interval = setInterval(() => {
++    5     setProblems((prev) => {
++    6       // Create the new problem with active: false
++    7       const newProblem = {
++    8         ...generateProblem(),
++    9         active: false // Ensure it's not active initially
++   10       };
++   11
++   12       // Add new problem and mark only the first one as active
++   13       const updated = [...prev, newProblem];
++   14       return updated.map((p, index) => ({
++   15         ...p,
++   16         active: index === 0
++   17       }));
++   18     });
++   19   }, 2000);
++   20   return () => clearInterval(interval);
++   21 }, [gameStarted, operation, generateProblem]);
++
++Fix this bug in math-rocket-defender.tsx
++
+
+# 2025-11-29 00:30:45.424597
++   1. First, update the generateProblem function to initialize problems with active: false:
++
++    1 // Generate a random problem
++    2 const generateProblem = useCallback(() => {
++    3   const ops = operation === "all" ? ["+", "-", "*", "/"] : [operation];
++    4   const op = ops[Math.floor(Math.random() * ops.length)];
++    5   let a = Math.floor(Math.random() * 10) + 1;
++    6   let b = Math.floor(Math.random() * 10) + 1;
++    7   if (op === "/") {
++    8     a = a * b;
++    9   }
++   10   const value = `${a} ${op} ${b}`;
++   11   const answer = eval(value);
++   12   return {
++   13     id: Date.now() + Math.random(),
++   14     value,
++   15     answer,
++   16     y: -50,
++   17     active: false, // Changed from true to false
++   18   };
++   19 }, [operation]);
++
++   2. Then, update the problem adding effect to properly handle the active state:
++
++    1 // Add new problem periodically
++    2 useEffect(() => {
++    3   if (!gameStarted) return;
++    4   const interval = setInterval(() => {
++    5     setProblems((prev) => {
++    6       // Create the new problem with active: false
++    7       const newProblem = {
++    8         ...generateProblem(),
++    9         active: false // Ensure it's not active initially
++   10       };
++   11
++   12       // Add new problem and mark only the first one as active
++   13       const updated = [...prev, newProblem];
++   14       return updated.map((p, index) => ({
++   15         ...p,
++   16         active: index === 0
++   17       }));
++   18     });
++   19   }, 2000);
++   20   return () => clearInterval(interval);
++   21 }, [gameStarted, operation, generateProblem]);
++
++Fix this bug in math-rocket-defender.tsx
++

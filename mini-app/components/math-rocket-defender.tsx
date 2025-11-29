@@ -37,7 +37,7 @@ export default function MathRocketDefender() {
       value,
       answer,
       y: -50,
-      active: true,
+      active: false,
     };
   }, [operation]);
 
@@ -45,10 +45,17 @@ export default function MathRocketDefender() {
   useEffect(() => {
     if (!gameStarted) return;
     const interval = setInterval(() => {
-      setProblems((prev) => [
-        ...prev.map((p) => ({ ...p, active: false })),
-        generateProblem(),
-      ]);
+      setProblems((prev) => {
+        const newProblem = {
+          ...generateProblem(),
+          active: false,
+        };
+        const updated = [...prev, newProblem];
+        return updated.map((p, index) => ({
+          ...p,
+          active: index === 0,
+        }));
+      });
     }, 2000);
     return () => clearInterval(interval);
   }, [gameStarted, operation, generateProblem]);

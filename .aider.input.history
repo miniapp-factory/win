@@ -856,3 +856,47 @@
 +
 +Fix this bug in math-rocket-defender.tsx
 +
+
+# 2025-11-29 01:02:22.637109
++  Request: Add a back button in the main game container that allows players to return to the start game container (with operation selection
++  and start button).
++
++  Current Issue: Players can only return to the start screen by refreshing the browser, which is not user-friendly.
++
++  Implementation:
++  Add a back button in the main game container (the div with class relative w-full h-[80vh] bg-black text-white overflow-hidden) that
++  resets the game state and returns to the start screen.
++
++  Functionality: When the back button is clicked, it should:
++   1. Set gameStarted to false
++   2. Reset the problems array to empty
++   3. Reset score to 0
++   4. Reset lives to 5
++   5. Set gameOver to false
++   6. Return to the start game container where operation selection and start button are visible
++
++  Placement: Position the back button in the top-left beside of the score 
++
++  Button State: The back button should only be visible when the game is active (gameStarted is true) and the game is not over.
+
+# 2025-11-29 01:02:22.637517
++  Request: Add a back button in the main game container that allows players to return to the start game container (with operation selection
++  and start button).
++
++  Current Issue: Players can only return to the start screen by refreshing the browser, which is not user-friendly.
++
++  Implementation:
++  Add a back button in the main game container (the div with class relative w-full h-[80vh] bg-black text-white overflow-hidden) that
++  resets the game state and returns to the start screen.
++
++  Functionality: When the back button is clicked, it should:
++   1. Set gameStarted to false
++   2. Reset the problems array to empty
++   3. Reset score to 0
++   4. Reset lives to 5
++   5. Set gameOver to false
++   6. Return to the start game container where operation selection and start button are visible
++
++  Placement: Position the back button in the top-left beside of the score 
++
++  Button State: The back button should only be visible when the game is active (gameStarted is true) and the game is not over.

@@ -144,16 +144,16 @@ export default function MathRocketDefender() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <!-- Nose cone -->
+          {/* Nose cone */}
           <polygon points="25,0 10,20 40,20" fill="red" />
-          <!-- Body -->
+          {/* Body */}
           <rect x="10" y="20" width="30" height="40" fill="orange" />
-          <!-- Window -->
+          {/* Window */}
           <circle cx="25" cy="35" r="5" fill="blue" />
-          <!-- Fins -->
+          {/* Fins */}
           <polygon points="10,60 0,70 10,70" fill="turquoise" />
           <polygon points="40,60 50,70 40,70" fill="turquoise" />
-          <!-- Flame -->
+          {/* Flame */}
           <path d="M25,70 Q20,75 25,80 Q30,75 25,70" fill="orange" />
         </svg>
       </div>

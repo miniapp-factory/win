@@ -1580,3 +1580,109 @@
 +          <path d="M18,72 Q25,78 32,72 Q25,82 18,72" fill="#EF4444" className="thrust-animation" /> {/* Red-500 */}
 +        </svg>
 +      </div>
+
+# 2025-11-30 11:07:35.961616
++can you the update the handle input submission with this code
++
++  // Handle input submission
++  const handleSubmit = (e: React.FormEvent) => {
++    e.preventDefault();
++    const num = Number(input);
++    if (isNaN(num)) {
++      setInput("");
++      return;
++    }
++    const active = problems.find((p) => p.active);
++    if (!active) {
++      setInput("");
++      return;
++    }
++    if (num === active.answer) {
++      // correct - add score effect and remove the problem
++      setScore((s) => s + 1);
++
++      // Add score effect at the score indicator position (top-right)
++      const newScoreEffect = {
++        id: Date.now(),
++        value: 1, // Points awarded
++        x: window.innerWidth - 80, // x position aligned with score counter (top-right)
++        y: 60,  // y position aligned with score counter
++        createdAt: Date.now()
++      };
++      setScoreEffects(prev => [...prev, newScoreEffect]);
++
++      // Remove score effect after animation
++      setTimeout(() => {
++        setScoreEffects(current => current.filter(se => se.id !== newScoreEffect.id));
++      }, 1000);
++
++      setProblems((prev) => {
++        const newProblems = prev.filter((p) => p.id !== active.id);
++        if (newProblems.length > 0) {
++          newProblems[0].active = true;
++        }
++        return newProblems;
++      });
++    } else {
++      // incorrect: shake input
++      const el = document.getElementById("answer-input");
++      if (el) el.classList.add("shake");
++      setTimeout(() => {
++        if (el) el.classList.remove("shake");
++      }, 500);
++    }
++    setInput("");
++  };
+
+# 2025-11-30 11:07:35.963426
++can you the update the handle input submission with this code
++
++  // Handle input submission
++  const handleSubmit = (e: React.FormEvent) => {
++    e.preventDefault();
++    const num = Number(input);
++    if (isNaN(num)) {
++      setInput("");
++      return;
++    }
++    const active = problems.find((p) => p.active);
++    if (!active) {
++      setInput("");
++      return;
++    }
++    if (num === active.answer) {
++      // correct - add score effect and remove the problem
++      setScore((s) => s + 1);
++
++      // Add score effect at the score indicator position (top-right)
++      const newScoreEffect = {
++        id: Date.now(),
++        value: 1, // Points awarded
++        x: window.innerWidth - 80, // x position aligned with score counter (top-right)
++        y: 60,  // y position aligned with score counter
++        createdAt: Date.now()
++      };
++      setScoreEffects(prev => [...prev, newScoreEffect]);
++
++      // Remove score effect after animation
++      setTimeout(() => {
++        setScoreEffects(current => current.filter(se => se.id !== newScoreEffect.id));
++      }, 1000);
++
++      setProblems((prev) => {
++        const newProblems = prev.filter((p) => p.id !== active.id);
++        if (newProblems.length > 0) {
++          newProblems[0].active = true;
++        }
++        return newProblems;
++      });
++    } else {
++      // incorrect: shake input
++      const el = document.getElementById("answer-input");
++      if (el) el.classList.add("shake");
++      setTimeout(() => {
++        if (el) el.classList.remove("shake");
++      }, 500);
++    }
++    setInput("");
++  };

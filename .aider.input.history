@@ -1478,3 +1478,41 @@
 +          </button>
 +        </div>
 +      )}
+
+# 2025-11-30 10:47:49.041576
++can you update the input part with this code
++
++{/* Input */}
++      <form
++        onSubmit={handleSubmit}
++        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2"
++      >
++        <input
++          id="answer-input"
++          type="text"
++          value={input}
++          onChange={(e) => setInput(e.target.value)}
++          placeholder="Answer"
++          autoComplete="off"
++          className="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-blue-500 transition-all duration-300 ease-in-out"
++        />
++      </form>
+
+# 2025-11-30 10:47:49.041953
++can you update the input part with this code
++
++{/* Input */}
++      <form
++        onSubmit={handleSubmit}
++        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2"
++      >
++        <input
++          id="answer-input"
++          type="text"
++          value={input}
++          onChange={(e) => setInput(e.target.value)}
++          placeholder="Answer"
++          autoComplete="off"
++          className="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-blue-500 transition-all duration-300 ease-in-out"
++        />
++      </form>

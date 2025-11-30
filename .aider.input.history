@@ -1516,3 +1516,67 @@
 +          className="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-blue-500 transition-all duration-300 ease-in-out"
 +        />
 +      </form>
+
+# 2025-11-30 10:59:34.048721
++can you update the rocket part with this code
++
++{/* Rocket */}
++      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
++        <svg
++          width="50"
++          height="80"
++          viewBox="0 0 50 80"
++          fill="none"
++          xmlns="http://www.w3.org/2000/svg"
++        >
++          {/* Nose cone - triangle at top */}
++          <polygon points="25,0 15,20 35,20" fill="#E11D48" /> {/* Red-600 */}
++          {/* Main body - rectangle */}
++          <rect x="10" y="20" width="30" height="40" fill="#1E40AF" /> {/* Blue-700 */}
++          {/* Cabin section - slightly different pattern to make it look more like a cabin */}
++          <rect x="12" y="25" width="26" height="30" fill="#3B82F6" /> {/* Blue-500 */}
++          {/* Window - circle in the middle of cabin */}
++          <circle cx="25" cy="40" r="6" fill="#BFDBFE" stroke="#93C5FD" stroke-width="1"/> {/* Light blue-200 with border */}
++          {/* Left fin */}
++          <polygon points="10,50 0,70 10,70" fill="#60A5FA" /> {/* Blue-400 */}
++          {/* Right fin */}
++          <polygon points="40,50 50,70 40,70" fill="#60A5FA" /> {/* Blue-400 */}
++          {/* Bottom center fin */}
++          <polygon points="20,70 30,70 25,80" fill="#60A5FA" /> {/* Blue-400 */}
++          {/* Engine exhaust/fire effect - animated */}
++          <path d="M20,70 Q25,75 30,70 Q25,80 20,70" fill="#F59E0B" className="thrust-animation" /> {/* Yellow-500 */}
++          <path d="M18,72 Q25,78 32,72 Q25,82 18,72" fill="#EF4444" className="thrust-animation" /> {/* Red-500 */}
++        </svg>
++      </div>
+
+# 2025-11-30 10:59:34.052336
++can you update the rocket part with this code
++
++{/* Rocket */}
++      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
++        <svg
++          width="50"
++          height="80"
++          viewBox="0 0 50 80"
++          fill="none"
++          xmlns="http://www.w3.org/2000/svg"
++        >
++          {/* Nose cone - triangle at top */}
++          <polygon points="25,0 15,20 35,20" fill="#E11D48" /> {/* Red-600 */}
++          {/* Main body - rectangle */}
++          <rect x="10" y="20" width="30" height="40" fill="#1E40AF" /> {/* Blue-700 */}
++          {/* Cabin section - slightly different pattern to make it look more like a cabin */}
++          <rect x="12" y="25" width="26" height="30" fill="#3B82F6" /> {/* Blue-500 */}
++          {/* Window - circle in the middle of cabin */}
++          <circle cx="25" cy="40" r="6" fill="#BFDBFE" stroke="#93C5FD" stroke-width="1"/> {/* Light blue-200 with border */}
++          {/* Left fin */}
++          <polygon points="10,50 0,70 10,70" fill="#60A5FA" /> {/* Blue-400 */}
++          {/* Right fin */}
++          <polygon points="40,50 50,70 40,70" fill="#60A5FA" /> {/* Blue-400 */}
++          {/* Bottom center fin */}
++          <polygon points="20,70 30,70 25,80" fill="#60A5FA" /> {/* Blue-400 */}
++          {/* Engine exhaust/fire effect - animated */}
++          <path d="M20,70 Q25,75 30,70 Q25,80 20,70" fill="#F59E0B" className="thrust-animation" /> {/* Yellow-500 */}
++          <path d="M18,72 Q25,78 32,72 Q25,82 18,72" fill="#EF4444" className="thrust-animation" /> {/* Red-500 */}
++        </svg>
++      </div>

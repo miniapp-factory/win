@@ -1736,3 +1736,61 @@
 +  id: number;
 +  createdAt: number;
 +};
+
+# 2025-11-30 11:36:48.277121
++can you add this react state before the // Generate a random problem part
++
++  const [operation, setOperation] = useState<"+" | "-" | "*" | "/" | "all">("all");
++  const [problems, setProblems] = useState<Problem[]>([]);
++  const [input, setInput] = useState("");
++  const [score, setScore] = useState(0);
++  const [gameStarted, setGameStarted] = useState(false);
++
++  // --- New states for lives & game over ---
++  const [lives, setLives] = useState(5);
++  const [gameOver, setGameOver] = useState(false);
++
++  // Animation states
++  const [scoreEffects, setScoreEffects] = useState<ScoreEffect[]>([]);
++  const [livesLossEffects, setLivesLossEffects] = useState<LivesLossEffect[]>([]);
++  const [explosionEffects, setExplosionEffects] = useState<ExplosionEffect[]>([]);
++
++  // High scores for each operation
++  const [highScores, setHighScores] = useState<Record<string, number>>({
++    "+": 0,
++    "-": 0,
++    "*": 0,
++    "/": 0,
++    "all": 0,
++  });
++
++remove duplication if there is
+
+# 2025-11-30 11:36:48.277711
++can you add this react state before the // Generate a random problem part
++
++  const [operation, setOperation] = useState<"+" | "-" | "*" | "/" | "all">("all");
++  const [problems, setProblems] = useState<Problem[]>([]);
++  const [input, setInput] = useState("");
++  const [score, setScore] = useState(0);
++  const [gameStarted, setGameStarted] = useState(false);
++
++  // --- New states for lives & game over ---
++  const [lives, setLives] = useState(5);
++  const [gameOver, setGameOver] = useState(false);
++
++  // Animation states
++  const [scoreEffects, setScoreEffects] = useState<ScoreEffect[]>([]);
++  const [livesLossEffects, setLivesLossEffects] = useState<LivesLossEffect[]>([]);
++  const [explosionEffects, setExplosionEffects] = useState<ExplosionEffect[]>([]);
++
++  // High scores for each operation
++  const [highScores, setHighScores] = useState<Record<string, number>>({
++    "+": 0,
++    "-": 0,
++    "*": 0,
++    "/": 0,
++    "all": 0,
++  });
++
++remove duplication if there is

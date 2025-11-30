@@ -27,6 +27,9 @@ export default function MathRocketDefender() {
     '/': 0,
     'all': 0,
   });
+  const [scoreEffects, setScoreEffects] = useState<
+    { id: number; value: number; x: number; y: number; createdAt: number }[]
+  >([]);
 
   // Generate a random problem
   const generateProblem = useCallback(() => {
@@ -127,8 +130,24 @@ export default function MathRocketDefender() {
       return;
     }
     if (num === active.answer) {
-      // correct
+      // correct - add score effect and remove the problem
       setScore((s) => s + 1);
+
+      // Add score effect at the score indicator position (top-right)
+      const newScoreEffect = {
+        id: Date.now(),
+        value: 1, // Points awarded
+        x: window.innerWidth - 80, // x position aligned with score counter (top-right)
+        y: 60,  // y position aligned with score counter
+        createdAt: Date.now()
+      };
+      setScoreEffects(prev => [...prev, newScoreEffect]);
+
+      // Remove score effect after animation
+      setTimeout(() => {
+        setScoreEffects(current => current.filter(se => se.id !== newScoreEffect.id));
+      }, 1000);
+
       setProblems((prev) => {
         const newProblems = prev.filter((p) => p.id !== active.id);
         if (newProblems.length > 0) {

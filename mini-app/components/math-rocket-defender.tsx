@@ -131,7 +131,7 @@ export default function MathRocketDefender() {
   };
 
   return (
-    <div className="relative w-full h-[80vh] bg-black text-white overflow-hidden">
+    <div className="relative w-full mx-auto max-w-4xl h-[calc(100vh-64px)] bg-black text-white overflow-hidden">
       {/* Space background */}
       <div className="absolute inset-0 bg-gradient-to-b from-indigo-900 to-black"></div>
 

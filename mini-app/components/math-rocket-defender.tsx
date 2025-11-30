@@ -10,6 +10,26 @@ type Problem = {
   active: boolean;
 };
 
+type ScoreEffect = {
+  id: number;
+  value: number;
+  x: number;
+  y: number;
+  createdAt: number;
+};
+
+type LivesLossEffect = {
+  id: number;
+  x: number;
+  y: number;
+  createdAt: number;
+};
+
+type ExplosionEffect = {
+  id: number;
+  createdAt: number;
+};
+
 export default function MathRocketDefender() {
   const [operation, setOperation] = useState<"+" | "-" | "*" | "/" | "all">("all");
   const [problems, setProblems] = useState<Problem[]>([]);

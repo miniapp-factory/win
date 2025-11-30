@@ -191,7 +191,7 @@ export default function MathRocketDefender() {
       {/* Input */}
       <form
         onSubmit={handleSubmit}
-        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-3/4"
+        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2"
       >
         <input
           id="answer-input"
@@ -199,7 +199,8 @@ export default function MathRocketDefender() {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Answer"
-          className="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-blue-500"
+          autoComplete="off"
+          className="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-blue-500 transition-all duration-300 ease-in-out"
         />
       </form>
 

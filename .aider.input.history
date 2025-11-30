@@ -1292,3 +1292,31 @@
 
 # 2025-11-30 08:23:01.513539
 +Create a main game container <div> that wraps all game elements. It should be relative, full width (w-full), centered horizontally with a maximum width of 4xl (mx-auto max-w-4xl), height equal to the viewport minus 64px (h-[calc(100vh-64px)]), background black (bg-black), text white (text-white), and overflow hidden (overflow-hidden).
+
+# 2025-11-30 09:14:49.682270
++make the main container into this class="flex flex-col place-items-center place-content-center grow. or just update the page.tsx with the following code.
++
++export default function Home() {
++  // NEVER write anything here, only use this page to import components
++  return (
++    <main className="flex flex-col place-items-center place-content-center grow">
++      <MathRocketDefender />
++    </main>
++  );
++}
++
++it removes the span title and description
+
+# 2025-11-30 09:14:49.682638
++make the main container into this class="flex flex-col place-items-center place-content-center grow. or just update the page.tsx with the following code.
++
++export default function Home() {
++  // NEVER write anything here, only use this page to import components
++  return (
++    <main className="flex flex-col place-items-center place-content-center grow">
++      <MathRocketDefender />
++    </main>
++  );
++}
++
++it removes the span title and description

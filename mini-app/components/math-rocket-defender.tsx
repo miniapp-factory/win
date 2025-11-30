@@ -153,7 +153,7 @@ export default function MathRocketDefender() {
       <div className="absolute inset-0 bg-gradient-to-b from-indigo-900 to-black"></div>
 
       {/* Rocket */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2">
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
         <svg
           width="50"
           height="80"
@@ -161,17 +161,23 @@ export default function MathRocketDefender() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Nose cone */}
-          <polygon points="25,0 10,20 40,20" fill="red" />
-          {/* Body */}
-          <rect x="10" y="20" width="30" height="40" fill="orange" />
-          {/* Window */}
-          <circle cx="25" cy="35" r="5" fill="blue" />
-          {/* Fins */}
-          <polygon points="10,60 0,70 10,70" fill="turquoise" />
-          <polygon points="40,60 50,70 40,70" fill="turquoise" />
-          {/* Flame */}
-          <path d="M25,70 Q20,75 25,80 Q30,75 25,70" fill="orange" />
+          {/* Nose cone - triangle at top */}
+          <polygon points="25,0 15,20 35,20" fill="#E11D48" /> {/* Red-600 */}
+          {/* Main body - rectangle */}
+          <rect x="10" y="20" width="30" height="40" fill="#1E40AF" /> {/* Blue-700 */}
+          {/* Cabin section - slightly different pattern to make it look more like a cabin */}
+          <rect x="12" y="25" width="26" height="30" fill="#3B82F6" /> {/* Blue-500 */}
+          {/* Window - circle in the middle of cabin */}
+          <circle cx="25" cy="40" r="6" fill="#BFDBFE" stroke="#93C5FD" stroke-width="1"/> {/* Light blue-200 with border */}
+          {/* Left fin */}
+          <polygon points="10,50 0,70 10,70" fill="#60A5FA" /> {/* Blue-400 */}
+          {/* Right fin */}
+          <polygon points="40,50 50,70 40,70" fill="#60A5FA" /> {/* Blue-400 */}
+          {/* Bottom center fin */}
+          <polygon points="20,70 30,70 25,80" fill="#60A5FA" /> {/* Blue-400 */}
+          {/* Engine exhaust/fire effect - animated */}
+          <path d="M20,70 Q25,75 30,70 Q25,80 20,70" fill="#F59E0B" className="thrust-animation" /> {/* Yellow-500 */}
+          <path d="M18,72 Q25,78 32,72 Q25,82 18,72" fill="#EF4444" className="thrust-animation" /> {/* Red-500 */}
         </svg>
       </div>
 

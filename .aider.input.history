@@ -1320,3 +1320,29 @@
 +}
 +
 +it removes the span title and description
+
+# 2025-11-30 09:37:52.531791
++Add high score tracking functionality:
++
++   1. Create state for high scores: const [highScores, setHighScores] = useState<Record<string, number>>({ '+': 0, '-': 0, '*':
++      0, '/': 0, 'all': 0 })
++   2. Update high score whenever current score exceeds stored high score for that operation
++   3. Display high score in top-right corner: 'High Score: {highScores[operation]}'
++   4. Update high score when game ends if current score is higher than stored high score
++   5. Position high score display near existing score counter using absolute positioning (top-4, right-4)"
++  </parameter>
++  </function>
++  </tool_call>
+
+# 2025-11-30 09:37:52.532930
++Add high score tracking functionality:
++
++   1. Create state for high scores: const [highScores, setHighScores] = useState<Record<string, number>>({ '+': 0, '-': 0, '*':
++      0, '/': 0, 'all': 0 })
++   2. Update high score whenever current score exceeds stored high score for that operation
++   3. Display high score in top-right corner: 'High Score: {highScores[operation]}'
++   4. Update high score when game ends if current score is higher than stored high score
++   5. Position high score display near existing score counter using absolute positioning (top-4, right-4)"
++  </parameter>
++  </function>
++  </tool_call>

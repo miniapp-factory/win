@@ -33,6 +33,30 @@ type ExplosionEffect = {
   createdAt: number;
 };
 
+type ConfettiParticle = {
+  id: number;
+  x: number;
+  y: number;
+  color: string;
+};
+
+type ConfettiEffect = {
+  id: number;
+  x: number;
+  y: number;
+  particles: ConfettiParticle[];
+  createdAt: number;
+};
+
+type LaserEffect = {
+  id: number;
+  startX: number;
+  startY: number;
+  endX: number;
+  endY: number;
+  createdAt: number;
+};
+
 export default function MathRocketDefender() {
   const [operation, setOperation] = useState<"+" | "-" | "*" | "/" | "all">("all");
   const [problems, setProblems] = useState<Problem[]>([]);
@@ -53,6 +77,8 @@ export default function MathRocketDefender() {
   const [scoreEffects, setScoreEffects] = useState<ScoreEffect[]>([]);
   const [livesLossEffects, setLivesLossEffects] = useState<LivesLossEffect[]>([]);
   const [explosionEffects, setExplosionEffects] = useState<ExplosionEffect[]>([]);
+  const [confettiEffects, setConfettiEffects] = useState<ConfettiEffect[]>([]); //New
+  const [laserEffects, setLaserEffects] = useState<LaserEffect[]>([]); //New
 
   // Generate a random problem
   const generateProblem = useCallback(() => {

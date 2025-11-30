@@ -10,6 +10,21 @@ type Problem = {
   active: boolean;
 };
 
+
+// --- New states for lives & game over ---
+const [lives, setLives] = useState(5);
+const [gameOver, setGameOver] = useState(false);
+const [highScores, setHighScores] = useState<Record<string, number>>({
+  '+': 0,
+  '-': 0,
+  '*': 0,
+  '/': 0,
+  'all': 0,
+});
+const [scoreEffects, setScoreEffects] = useState<
+  { id: number; value: number; x: number; y: number; createdAt: number }[]
+>[];
+
 type ScoreEffect = {
   id: number;
   value: number;

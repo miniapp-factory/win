@@ -50,9 +50,9 @@ export default function MathRocketDefender() {
     '/': 0,
     'all': 0,
   });
-  const [scoreEffects, setScoreEffects] = useState<
-    { id: number; value: number; x: number; y: number; createdAt: number }[]
-  >([]);
+  const [scoreEffects, setScoreEffects] = useState<ScoreEffect[]>([]);
+  const [livesLossEffects, setLivesLossEffects] = useState<LivesLossEffect[]>([]);
+  const [explosionEffects, setExplosionEffects] = useState<ExplosionEffect[]>([]);
 
   // Generate a random problem
   const generateProblem = useCallback(() => {

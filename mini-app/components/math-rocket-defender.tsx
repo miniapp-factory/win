@@ -327,6 +327,37 @@ export default function MathRocketDefender() {
       ))}
 
       {/* Input */}
+      {/* Explosion Effects - appear where problems hit the rocket */}
+      {explosionEffects.map((effect) => (
+        <div
+          key={effect.id}
+          className="absolute pointer-events-none animate-explosion"
+          style={{
+            left: '50%',
+            bottom: '90px',
+            transform: 'translate(-50%, 50%)',
+          }}
+        >
+          <div className="w-12 h-12 rounded-full border-4 border-red-500 opacity-80"></div>
+          <div className="absolute top-0 left-0 w-12 h-12 rounded-full border-4 border-yellow-400 opacity-60 animate-ping"></div>
+        </div>
+      ))}
+
+      {/* Score Effects - appear near the score display */}
+      {scoreEffects.map((effect) => (
+        <div
+          key={effect.id}
+          className="absolute pointer-events-none text-green-400 font-bold text-xl animate-scoreRise"
+          style={{
+            right: '20px',  // Positioned to the right of the score counter
+            top: '48px',     // Aligned with the score
+            transform: 'translateX(0)',
+          }}
+        >
+          +{effect.value}
+        </div>
+      ))}
+
       <form
         onSubmit={handleSubmit}
         className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2"

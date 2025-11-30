@@ -20,6 +20,13 @@ export default function MathRocketDefender() {
   // --- New states for lives & game over ---
   const [lives, setLives] = useState(5);
   const [gameOver, setGameOver] = useState(false);
+  const [highScores, setHighScores] = useState<Record<string, number>>({
+    '+': 0,
+    '-': 0,
+    '*': 0,
+    '/': 0,
+    'all': 0,
+  });
 
   // Generate a random problem
   const generateProblem = useCallback(() => {
@@ -95,6 +102,16 @@ export default function MathRocketDefender() {
     animationFrameId = requestAnimationFrame(animation);
     return () => cancelAnimationFrame(animationFrameId);
   }, [gameStarted]);
+
+  // Update high score whenever score changes for the current operation
+  useEffect(() => {
+    if (score > highScores[operation]) {
+      setHighScores((prev) => ({
+        ...prev,
+        [operation]: score,
+      }));
+    }
+  }, [score, operation, highScores]);
 
   // Handle input submission
   const handleSubmit = (e: React.FormEvent) => {
@@ -204,6 +221,9 @@ export default function MathRocketDefender() {
       {/* Score */}
       <div className="absolute top-12 right-4 text-xl text-orange-400">
         Score: {score}
+      </div>
+      <div className="absolute top-4 right-4 text-xl text-orange-400">
+        High Score: {highScores[operation]}
       </div>
 
       {/* Lives */}

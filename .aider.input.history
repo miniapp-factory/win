@@ -2666,3 +2666,57 @@
 +          }
 +        }
 +
+
+# 2025-11-30 14:05:31.323548
++can you add this in the type part
++
++type ConfettiParticle = {
++  id: number;
++  x: number;
++  y: number;
++  color: string;
++};
++
++type ConfettiEffect = {
++  id: number;
++  x: number;
++  y: number;
++  particles: ConfettiParticle[];
++  createdAt: number;
++};
++
++type LaserEffect = {
++  id: number;
++  startX: number;
++  startY: number;
++  endX: number;
++  endY: number;
++  createdAt: number;
++};
+
+# 2025-11-30 14:05:31.324010
++can you add this in the type part
++
++type ConfettiParticle = {
++  id: number;
++  x: number;
++  y: number;
++  color: string;
++};
++
++type ConfettiEffect = {
++  id: number;
++  x: number;
++  y: number;
++  particles: ConfettiParticle[];
++  createdAt: number;
++};
++
++type LaserEffect = {
++  id: number;
++  startX: number;
++  startY: number;
++  endX: number;
++  endY: number;
++  createdAt: number;
++};

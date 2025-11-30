@@ -1822,3 +1822,261 @@
 +  const [scoreEffects, setScoreEffects] = useState<ScoreEffect[]>([]);
 +  const [livesLossEffects, setLivesLossEffects] = useState<LivesLossEffect[]>([]);
 +  const [explosionEffects, setExplosionEffects] = useState<ExplosionEffect[]>([]);
+
+# 2025-11-30 11:59:30.267515
++can you change the move problem down part with this code
++
++  // Move problems down
++  useEffect(() => {
++    if (!gameStarted) return;
++    let animationFrameId: number;
++    const animation = () => {
++      // Calculate the actual height of the game container
++      const gameContainer = document.querySelector('.h-\\[calc\\(100vh-64px\\)\\]') as HTMLElement;
++      const gameHeight = gameContainer ? gameContainer.clientHeight : window.innerHeight * 0.8;
++
++      // The rocket is positioned with bottom-16 (64px from bottom) and has height 80px
++      // So the tip of the rocket (where collision happens) is at: gameHeight - 64px - 80px = gameHeight - 144px
++      const rocketTopY = gameHeight - 64 - 80; // gameHeight - bottom_offset - rocket_height
++
++      // Track if we already lost a life in this frame
++      let didLoseLife = false;
++
++      setProblems((prev) => {
++        // First, update all problem positions
++        const problemsWithNewPositions = prev.map((p) => ({
++          ...p,
++          y: p.y + Math.floor(window.innerHeight * 0.002)
++        }));
++
++        // Find the first problem that should cause a life loss (if any)
++        let problemToLoseLifeFor = null;
++        for (const problem of problemsWithNewPositions) {
++          if (problem.y >= rocketTopY && !didLoseLife) {
++            didLoseLife = true;
++            problemToLoseLifeFor = problem.id;
++            break;
++          }
++        }
++
++        // If we found a problem that should cause a life loss, update the state
++        if (didLoseLife && problemToLoseLifeFor) {
++          // Create lives loss effect at the lives counter position
++          const newLivesLossEffect = {
++            id: Date.now(),
++            x: 100, // x position aligned with lives counter (left side)
++            y: 60,  // y position aligned with lives counter
++            createdAt: Date.now()
++          };
++          setLivesLossEffects(prev => [...prev, newLivesLossEffect]);
++
++          // Create explosion effect at the same position as the rocket
++          const newExplosionEffect = {
++            id: Date.now(),
++            createdAt: Date.now()
++          };
++          setExplosionEffects(prev => [...prev, newExplosionEffect]);
++
++          // Remove old lives loss effects to avoid memory issues
++          setTimeout(() => {
++            setLivesLossEffects(current => current.filter(effect => effect.id !== newLivesLossEffect.id));
++          }, 1000); // Expire after 1 second
++
++          // Remove old explosion effects to avoid memory issues
++          setTimeout(() => {
++            setExplosionEffects(current => current.filter(effect => effect.id !== newExplosionEffect.id));
++          }, 1000); // Expire after 1 second
++
++          setLives((l) => {
++            const newLives = l - 1;
++            if (newLives <= 0) {
++              // Update high score before ending the game
++              if (score > highScores[operation]) {
++                setHighScores(prev => ({
++                  ...prev,
++                  [operation]: score
++                }));
++              }
++              // Create a final lives loss effect to show game over effect
++              const gameOverEffect = {
++                id: Date.now(),
++                x: 100, // x position aligned with lives counter (left side)
++                y: 60,  // y position aligned with lives counter
++                createdAt: Date.now()
++              };
++              setLivesLossEffects(prev => [...prev, gameOverEffect]);
++
++              // Create a final explosion effect for game over
++              const gameExplosionEffect = {
++                id: Date.now(),
++                createdAt: Date.now()
++              };
++              setExplosionEffects(prev => [...prev, gameExplosionEffect]);
++
++              // Remove game over effect after delay
++              setTimeout(() => {
++                setLivesLossEffects(current => current.filter(effect => effect.id !== gameOverEffect.id));
++              }, 1000);
++
++              // Remove game over explosion effect after delay
++              setTimeout(() => {
++                setExplosionEffects(current => current.filter(effect => effect.id !== gameExplosionEffect.id));
++              }, 1000);
++
++              setGameOver(true);
++              setGameStarted(false);
++              setProblems([]);
++              return 5; // reset lives on game over
++            }
++            return newLives;
++          });
++        }
++
++        // Filter out problems that should be removed (hit the rocket)
++        const updated = problemsWithNewPositions.filter((p) => {
++          // Remove problem if it has hit the rocket
++          if (p.y >= rocketTopY) {
++            return false;
++          }
++          return true; // keep problem that hasn't reached the rocket yet
++        });
++
++        if (updated.length > 0) {
++          updated[0].active = true;
++        }
++        return updated;
++      });
++      animationFrameId = requestAnimationFrame(animation);
++    };
++    animationFrameId = requestAnimationFrame(animation);
++    return () => cancelAnimationFrame(animationFrameId);
++  }, [gameStarted]);
+
+# 2025-11-30 11:59:30.270020
++can you change the move problem down part with this code
++
++  // Move problems down
++  useEffect(() => {
++    if (!gameStarted) return;
++    let animationFrameId: number;
++    const animation = () => {
++      // Calculate the actual height of the game container
++      const gameContainer = document.querySelector('.h-\\[calc\\(100vh-64px\\)\\]') as HTMLElement;
++      const gameHeight = gameContainer ? gameContainer.clientHeight : window.innerHeight * 0.8;
++
++      // The rocket is positioned with bottom-16 (64px from bottom) and has height 80px
++      // So the tip of the rocket (where collision happens) is at: gameHeight - 64px - 80px = gameHeight - 144px
++      const rocketTopY = gameHeight - 64 - 80; // gameHeight - bottom_offset - rocket_height
++
++      // Track if we already lost a life in this frame
++      let didLoseLife = false;
++
++      setProblems((prev) => {
++        // First, update all problem positions
++        const problemsWithNewPositions = prev.map((p) => ({
++          ...p,
++          y: p.y + Math.floor(window.innerHeight * 0.002)
++        }));
++
++        // Find the first problem that should cause a life loss (if any)
++        let problemToLoseLifeFor = null;
++        for (const problem of problemsWithNewPositions) {
++          if (problem.y >= rocketTopY && !didLoseLife) {
++            didLoseLife = true;
++            problemToLoseLifeFor = problem.id;
++            break;
++          }
++        }
++
++        // If we found a problem that should cause a life loss, update the state
++        if (didLoseLife && problemToLoseLifeFor) {
++          // Create lives loss effect at the lives counter position
++          const newLivesLossEffect = {
++            id: Date.now(),
++            x: 100, // x position aligned with lives counter (left side)
++            y: 60,  // y position aligned with lives counter
++            createdAt: Date.now()
++          };
++          setLivesLossEffects(prev => [...prev, newLivesLossEffect]);
++
++          // Create explosion effect at the same position as the rocket
++          const newExplosionEffect = {
++            id: Date.now(),
++            createdAt: Date.now()
++          };
++          setExplosionEffects(prev => [...prev, newExplosionEffect]);
++
++          // Remove old lives loss effects to avoid memory issues
++          setTimeout(() => {
++            setLivesLossEffects(current => current.filter(effect => effect.id !== newLivesLossEffect.id));
++          }, 1000); // Expire after 1 second
++
++          // Remove old explosion effects to avoid memory issues
++          setTimeout(() => {
++            setExplosionEffects(current => current.filter(effect => effect.id !== newExplosionEffect.id));
++          }, 1000); // Expire after 1 second
++
++          setLives((l) => {
++            const newLives = l - 1;
++            if (newLives <= 0) {
++              // Update high score before ending the game
++              if (score > highScores[operation]) {
++                setHighScores(prev => ({
++                  ...prev,
++                  [operation]: score
++                }));
++              }
++              // Create a final lives loss effect to show game over effect
++              const gameOverEffect = {
++                id: Date.now(),
++                x: 100, // x position aligned with lives counter (left side)
++                y: 60,  // y position aligned with lives counter
++                createdAt: Date.now()
++              };
++              setLivesLossEffects(prev => [...prev, gameOverEffect]);
++
++              // Create a final explosion effect for game over
++              const gameExplosionEffect = {
++                id: Date.now(),
++                createdAt: Date.now()
++              };
++              setExplosionEffects(prev => [...prev, gameExplosionEffect]);
++
++              // Remove game over effect after delay
++              setTimeout(() => {
++                setLivesLossEffects(current => current.filter(effect => effect.id !== gameOverEffect.id));
++              }, 1000);
++
++              // Remove game over explosion effect after delay
++              setTimeout(() => {
++                setExplosionEffects(current => current.filter(effect => effect.id !== gameExplosionEffect.id));
++              }, 1000);
++
++              setGameOver(true);
++              setGameStarted(false);
++              setProblems([]);
++              return 5; // reset lives on game over
++            }
++            return newLives;
++          });
++        }
++
++        // Filter out problems that should be removed (hit the rocket)
++        const updated = problemsWithNewPositions.filter((p) => {
++          // Remove problem if it has hit the rocket
++          if (p.y >= rocketTopY) {
++            return false;
++          }
++          return true; // keep problem that hasn't reached the rocket yet
++        });
++
++        if (updated.length > 0) {
++          updated[0].active = true;
++        }
++        return updated;
++      });
++      animationFrameId = requestAnimationFrame(animation);
++    };
++    animationFrameId = requestAnimationFrame(animation);
++    return () => cancelAnimationFrame(animationFrameId);
++  }, [gameStarted]);

@@ -437,9 +437,9 @@ export default function MathRocketDefender() {
         const effectiveHighScore = score > highScores[operation] ? score : highScores[operation];
         return (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 text-red-500 text-3xl font-bold">
-            <div className="mb-4 text-orange-400">Score: {score}</div>
             <div className="mb-4 text-green-400">High Score: {effectiveHighScore}</div>
-            Game Over
+            <div className="mb-10 text-orange-400">Score: {score}</div>
+            <div className="mb-4 text-5xl font-bold text-red-500">Game Over</div>
             <button
               className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
               onClick={() => {

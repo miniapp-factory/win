@@ -1686,3 +1686,53 @@
 +    }
 +    setInput("");
 +  };
+
+# 2025-11-30 11:23:32.095845
++can you add this type that ill be using later
++
++after the type Problem put this 
++
++type ScoreEffect = {
++  id: number;
++  value: number;
++  x: number;
++  y: number;
++  createdAt: number;
++};
++
++type LivesLossEffect = {
++  id: number;
++  x: number;
++  y: number;
++  createdAt: number;
++};
++
++type ExplosionEffect = {
++  id: number;
++  createdAt: number;
++};
+
+# 2025-11-30 11:23:32.096242
++can you add this type that ill be using later
++
++after the type Problem put this 
++
++type ScoreEffect = {
++  id: number;
++  value: number;
++  x: number;
++  y: number;
++  createdAt: number;
++};
++
++type LivesLossEffect = {
++  id: number;
++  x: number;
++  y: number;
++  createdAt: number;
++};
++
++type ExplosionEffect = {
++  id: number;
++  createdAt: number;
++};

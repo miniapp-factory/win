@@ -622,18 +622,34 @@ export default function MathRocketDefender() {
           }
         }
 
-        .confetti-particle {
-          animation: confettiAnimation 1.5s forwards;
-        }
-
-        @keyframes confettiAnimation {
+        @keyframes confettiParticleAnimation {
           0% {
-            transform: translate(-50%, -50%) scale(1);
+            transform: translate(0, 0) scale(1) rotate(0deg);
             opacity: 1;
           }
           100% {
-            transform: translate(-50%, -50%) translate(var(--x, 0), var(--y, 0)) rotate(var(--rotation, 0deg)) scale(0);
+            transform: translate(var(--final-x, 0), var(--final-y, 0)) scale(0) rotate(360deg);
             opacity: 0;
+          }
+        }
+
+        .laser-beam {
+          box-shadow: 0 0 8px #3B82F6, 0 0 16px #3B82F6;
+          animation: laserPulse 0.15s ease-in-out;
+        }
+
+        @keyframes laserPulse {
+          0% {
+            opacity: 0;
+            box-shadow: 0 0 0px #3B82F6;
+          }
+          50% {
+            opacity: 1;
+            box-shadow: 0 0 10px #3B82F6, 0 0 20px #3B82F6;
+          }
+          100% {
+            opacity: 0.8;
+            box-shadow: 0 0 8px #3B82F6, 0 0 16px #3B82F6;
           }
         }
       `}</style>

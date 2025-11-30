@@ -222,7 +222,7 @@ export default function MathRocketDefender() {
       <div className="absolute top-12 right-4 text-xl text-orange-400">
         Score: {score}
       </div>
-      <div className="absolute top-4 right-4 text-xl text-orange-400">
+      <div className="absolute top-4 right-4 text-xl text-green-400">
         High Score: {highScores[operation]}
       </div>
 
@@ -259,24 +259,35 @@ export default function MathRocketDefender() {
       )}
 
       {/* Game Over overlay */}
-      {gameOver && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 text-red-500 text-3xl font-bold">
-          <div className="mb-4 text-orange-400">Score: {score}</div>
-          Game Over
-          <button
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            onClick={() => {
-              setGameStarted(true);
-              setGameOver(false);
-              setLives(5);
-              setProblems([]);
-              setScore(0);
-            }}
-          >
-            Restart
-          </button>
-        </div>
-      )}
+      {gameOver && (() => {
+        const effectiveHighScore = score > highScores[operation] ? score : highScores[operation];
+        return (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 text-red-500 text-3xl font-bold">
+            <div className="mb-4 text-orange-400">Score: {score}</div>
+            <div className="mb-4 text-green-400">High Score: {effectiveHighScore}</div>
+            Game Over
+            <button
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              onClick={() => {
+                // Update high score if current score is higher
+                if (score > highScores[operation]) {
+                  setHighScores(prev => ({
+                    ...prev,
+                    [operation]: score
+                  }));
+                }
+                setGameStarted(true);
+                setGameOver(false);
+                setLives(5);
+                setProblems([]);
+                setScore(0);
+              }}
+            >
+              Restart
+            </button>
+          </div>
+        );
+      })()}
 
       <style jsx>{`
         .shake {

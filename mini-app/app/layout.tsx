@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { MiniAppProvider } from "@/components/context/miniapp-provider";
-import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { description, title } from "@/lib/metadata";
 
@@ -24,10 +23,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
         <MiniAppProvider>
-          <div className="font-sans min-h-screen flex flex-col place-content-between gap-2">
+          <div className="font-sans min-h-screen flex flex-col">
             <Header />
-            {children}
-            <Footer />
+            <div className="flex-grow">
+              {children}
+            </div>
           </div>
         </MiniAppProvider>
       </body>

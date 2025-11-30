@@ -1794,3 +1794,31 @@
 +  });
 +
 +remove duplication if there is
+
+# 2025-11-30 11:49:38.436461
++can you remove this
++
++  const [scoreEffects, setScoreEffects] = useState<
++    { id: number; value: number; x: number; y: number; createdAt: number }[]
++  >([]);
++
++ inside the MathRocketDefender function. Then Add this new state
++
++  // Animation states
++  const [scoreEffects, setScoreEffects] = useState<ScoreEffect[]>([]);
++  const [livesLossEffects, setLivesLossEffects] = useState<LivesLossEffect[]>([]);
++  const [explosionEffects, setExplosionEffects] = useState<ExplosionEffect[]>([]);
+
+# 2025-11-30 11:49:38.443237
++can you remove this
++
++  const [scoreEffects, setScoreEffects] = useState<
++    { id: number; value: number; x: number; y: number; createdAt: number }[]
++  >([]);
++
++ inside the MathRocketDefender function. Then Add this new state
++
++  // Animation states
++  const [scoreEffects, setScoreEffects] = useState<ScoreEffect[]>([]);
++  const [livesLossEffects, setLivesLossEffects] = useState<LivesLossEffect[]>([]);
++  const [explosionEffects, setExplosionEffects] = useState<ExplosionEffect[]>([]);

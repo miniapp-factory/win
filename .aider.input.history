@@ -2396,3 +2396,137 @@
 +          </div>
 +        );
 +      })()}
+
+# 2025-11-30 13:24:59.621233
++can you replace the style jsx with this
++
++      <style jsx>{`
++        .shake {
++          animation: shake 0.5s;
++        }
++
++        @keyframes shake {
++          0% { transform: translateX(0); }
++          25% { transform: translateX(-5px); }
++          50% { transform: translateX(5px); }
++          75% { transform: translateX(-5px); }
++          100% { transform: translateX(0); }
++        }
++
++        @keyframes explosion {
++          0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
++          50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
++          100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
++        }
++
++        @keyframes thrust-flicker {
++          0% { opacity: 0.8; transform: scaleY(1); }
++          100% { opacity: 1; transform: scaleY(1.1); }
++        }
++
++        .thrust-animation {
++          animation: thrust-flicker 0.5s infinite alternate;
++        }
++
++        .animate-scoreRise {
++          animation: scoreRise 1s forwards;
++        }
++
++        @keyframes scoreRise {
++          0% {
++            transform: translate(-50%, -100%);
++            opacity: 1;
++            margin-top: 0;
++          }
++          100% {
++            transform: translate(-50%, -200%);
++            opacity: 0;
++            margin-top: -50px;
++          }
++        }
++
++        .animate-livesLoss {
++          animation: livesLossRise 1s forwards;
++        }
++
++        @keyframes livesLossRise {
++          0% {
++            transform: translate(-50%, -100%);
++            opacity: 1;
++            margin-top: 0;
++          }
++          100% {
++            transform: translate(-50%, -200%);
++            opacity: 0;
++            margin-top: -50px;
++          }
++        }
++
++      `}</style>
+
+# 2025-11-30 13:24:59.621727
++can you replace the style jsx with this
++
++      <style jsx>{`
++        .shake {
++          animation: shake 0.5s;
++        }
++
++        @keyframes shake {
++          0% { transform: translateX(0); }
++          25% { transform: translateX(-5px); }
++          50% { transform: translateX(5px); }
++          75% { transform: translateX(-5px); }
++          100% { transform: translateX(0); }
++        }
++
++        @keyframes explosion {
++          0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
++          50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
++          100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
++        }
++
++        @keyframes thrust-flicker {
++          0% { opacity: 0.8; transform: scaleY(1); }
++          100% { opacity: 1; transform: scaleY(1.1); }
++        }
++
++        .thrust-animation {
++          animation: thrust-flicker 0.5s infinite alternate;
++        }
++
++        .animate-scoreRise {
++          animation: scoreRise 1s forwards;
++        }
++
++        @keyframes scoreRise {
++          0% {
++            transform: translate(-50%, -100%);
++            opacity: 1;
++            margin-top: 0;
++          }
++          100% {
++            transform: translate(-50%, -200%);
++            opacity: 0;
++            margin-top: -50px;
++          }
++        }
++
++        .animate-livesLoss {
++          animation: livesLossRise 1s forwards;
++        }
++
++        @keyframes livesLossRise {
++          0% {
++            transform: translate(-50%, -100%);
++            opacity: 1;
++            margin-top: 0;
++          }
++          100% {
++            transform: translate(-50%, -200%);
++            opacity: 0;
++            margin-top: -50px;
++          }
++        }
++
++      `}</style>

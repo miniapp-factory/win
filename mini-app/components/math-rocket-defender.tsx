@@ -317,10 +317,13 @@ export default function MathRocketDefender() {
       {problems.map((p) => (
         <div
           key={p.id}
-          className={`absolute left-1/2 transform -translate-x-1/2 text-2xl font-bold ${
-            p.active ? "text-orange-400" : "text-white"
+          className={`absolute left-1/2 transform -translate-x-1/2 text-2xl font-bold transition-all duration-300 ${
+            p.active ? "text-orange-400 scale-110" : "text-white"
           }`}
-          style={{ top: `${p.y}px` }}
+          style={{
+            top: `${p.y}px`,
+            transition: p.active ? 'transform 0.1s ease, text-shadow 0.1s ease' : 'none'
+          }}
         >
           {p.value}
         </div>
@@ -459,6 +462,21 @@ export default function MathRocketDefender() {
           </div>
         );
       })()}
+
+      {/* Lives Loss Effects - appear near the lives display */}
+      {livesLossEffects.map((effect) => (
+        <div
+          key={effect.id}
+          className="absolute pointer-events-none text-red-500 font-bold text-xl animate-livesLoss"
+          style={{
+            left: '90px',  // Positioned to the right of the lives counter
+            top: '48px',    // Aligned with the lives counter
+            transform: 'translateX(-50%)',
+          }}
+        >
+          -1
+        </div>
+      ))}
 
       <style jsx>{`
         .shake {

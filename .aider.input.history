@@ -2720,3 +2720,29 @@
 +  endY: number;
 +  createdAt: number;
 +};
+
+# 2025-11-30 14:16:22.953357
++in the MathRocketDefender function there is 
++
++group the existing state with this comment
++  // Animation states
++  const [scoreEffects, setScoreEffects] = useState<ScoreEffect[]>([]);
++  const [livesLossEffects, setLivesLossEffects] = useState<LivesLossEffect[]>([]);
++  const [explosionEffects, setExplosionEffects] = useState<ExplosionEffect[]>([]);
++
++and add this 
++  const [confettiEffects, setConfettiEffects] = useState<ConfettiEffect[]>([]); //New
++  const [laserEffects, setLaserEffects] = useState<LaserEffect[]>([]); //New
+
+# 2025-11-30 14:16:22.953788
++in the MathRocketDefender function there is 
++
++group the existing state with this comment
++  // Animation states
++  const [scoreEffects, setScoreEffects] = useState<ScoreEffect[]>([]);
++  const [livesLossEffects, setLivesLossEffects] = useState<LivesLossEffect[]>([]);
++  const [explosionEffects, setExplosionEffects] = useState<ExplosionEffect[]>([]);
++
++and add this 
++  const [confettiEffects, setConfettiEffects] = useState<ConfettiEffect[]>([]); //New
++  const [laserEffects, setLaserEffects] = useState<LaserEffect[]>([]); //New

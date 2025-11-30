@@ -2530,3 +2530,139 @@
 +        }
 +
 +      `}</style>
+
+# 2025-11-30 13:54:07.188379
++can you add this keyframes inside the style jsx
++
++        @keyframes explosion {
++          0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
++          50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
++          100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
++        }
++
++        @keyframes thrust-flicker {
++          0% { opacity: 0.8; transform: scaleY(1); }
++          100% { opacity: 1; transform: scaleY(1.1); }
++        }
++
++        .thrust-animation {
++          animation: thrust-flicker 0.5s infinite alternate;
++        }
++
++        .animate-scoreRise {
++          animation: scoreRise 1s forwards;
++        }
++
++        @keyframes scoreRise {
++          0% {
++            transform: translate(-50%, -100%);
++            opacity: 1;
++            margin-top: 0;
++          }
++          100% {
++            transform: translate(-50%, -200%);
++            opacity: 0;
++            margin-top: -50px;
++          }
++        }
++
++        .animate-livesLoss {
++          animation: livesLossRise 1s forwards;
++        }
++
++        @keyframes livesLossRise {
++          0% {
++            transform: translate(-50%, -100%);
++            opacity: 1;
++            margin-top: 0;
++          }
++          100% {
++            transform: translate(-50%, -200%);
++            opacity: 0;
++            margin-top: -50px;
++          }
++        }
++
++        .confetti-particle {
++          animation: confettiAnimation 1.5s forwards;
++        }
++
++        @keyframes confettiAnimation {
++          0% {
++            transform: translate(-50%, -50%) scale(1);
++            opacity: 1;
++          }
++          100% {
++            transform: translate(-50%, -50%) translate(var(--x, 0), var(--y, 0)) rotate(var(--rotation, 0deg)) scale(0);
++            opacity: 0;
++          }
++        }
++
+
+# 2025-11-30 13:54:07.188805
++can you add this keyframes inside the style jsx
++
++        @keyframes explosion {
++          0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
++          50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
++          100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
++        }
++
++        @keyframes thrust-flicker {
++          0% { opacity: 0.8; transform: scaleY(1); }
++          100% { opacity: 1; transform: scaleY(1.1); }
++        }
++
++        .thrust-animation {
++          animation: thrust-flicker 0.5s infinite alternate;
++        }
++
++        .animate-scoreRise {
++          animation: scoreRise 1s forwards;
++        }
++
++        @keyframes scoreRise {
++          0% {
++            transform: translate(-50%, -100%);
++            opacity: 1;
++            margin-top: 0;
++          }
++          100% {
++            transform: translate(-50%, -200%);
++            opacity: 0;
++            margin-top: -50px;
++          }
++        }
++
++        .animate-livesLoss {
++          animation: livesLossRise 1s forwards;
++        }
++
++        @keyframes livesLossRise {
++          0% {
++            transform: translate(-50%, -100%);
++            opacity: 1;
++            margin-top: 0;
++          }
++          100% {
++            transform: translate(-50%, -200%);
++            opacity: 0;
++            margin-top: -50px;
++          }
++        }
++
++        .confetti-particle {
++          animation: confettiAnimation 1.5s forwards;
++        }
++
++        @keyframes confettiAnimation {
++          0% {
++            transform: translate(-50%, -50%) scale(1);
++            opacity: 1;
++          }
++          100% {
++            transform: translate(-50%, -50%) translate(var(--x, 0), var(--y, 0)) rotate(var(--rotation, 0deg)) scale(0);
++            opacity: 0;
++          }
++        }
++

@@ -269,31 +269,89 @@ export default function MathRocketDefender() {
       return;
     }
     if (num === active.answer) {
-      // correct - add score effect and remove the problem
-      setScore((s) => s + 1);
+      // Calculate game container height to determine rocket position
+      const gameContainer = document.querySelector('.h-\\[calc\\(100vh-64px\\)\\]') as HTMLElement;
+      const gameHeight = gameContainer ? gameContainer.clientHeight : window.innerHeight * 0.8;
+      const rocketY = gameHeight - 64 - 80; // Rocket bottom position minus full rocket height (80px), so we get the top
 
-      // Add score effect at the score indicator position (top-right)
-      const newScoreEffect = {
+      // Add laser effect from rocket head to problem
+      const newLaserEffect = {
         id: Date.now(),
-        value: 1, // Points awarded
-        x: window.innerWidth - 80, // x position aligned with score counter (top-right)
-        y: 60,  // y position aligned with score counter
+        startX: window.innerWidth / 2, // Rocket is centered
+        startY: rocketY, // Top of the rocket
+        endX: window.innerWidth / 2, // Problem is centered
+        endY: active.y,
         createdAt: Date.now()
       };
-      setScoreEffects(prev => [...prev, newScoreEffect]);
+      setLaserEffects(prev => [...prev, newLaserEffect]);
 
-      // Remove score effect after animation
+      // Remove laser effect after animation (short duration)
       setTimeout(() => {
-        setScoreEffects(current => current.filter(se => se.id !== newScoreEffect.id));
-      }, 1000);
+        setLaserEffects(current => current.filter(le => le.id !== newLaserEffect.id));
+      }, 150); // Laser animation is fast
 
-      setProblems((prev) => {
-        const newProblems = prev.filter((p) => p.id !== active.id);
-        if (newProblems.length > 0) {
-          newProblems[0].active = true;
-        }
-        return newProblems;
-      });
+      // Add score effect after laser hits the problem
+      setTimeout(() => {
+        setScore((s) => s + 1);
+
+        // Add score effect at the score indicator position (top-right)
+        const newScoreEffect = {
+          id: Date.now(),
+          value: 1, // Points awarded
+          x: window.innerWidth - 80, // x position aligned with score counter (top-right)
+          y: 60,  // y position aligned with score counter
+          createdAt: Date.now()
+        };
+        setScoreEffects(prev => [...prev, newScoreEffect]);
+
+        // Remove score effect after animation
+        setTimeout(() => {
+          setScoreEffects(current => current.filter(se => se.id !== newScoreEffect.id));
+        }, 1000);
+
+        // Add confetti effect at the problem's current position
+        const confettiParticles = Array.from({ length: 15 }, (_, i) => {
+          // Random angle in radians
+          const angle = Math.random() * Math.PI * 2;
+          // Random distance
+          const distance = 30 + Math.random() * 50;
+          // Random color for confetti
+          const colors = ['#F59E0B', '#EF4444', '#10B981', '#3B82F6', '#8B5CF6', '#EC4899'];
+          const color = colors[Math.floor(Math.random() * colors.length)];
+
+          return {
+            id: Date.now() + i,
+            x: Math.cos(angle) * distance,
+            y: Math.sin(angle) * distance,
+            color
+          };
+        });
+
+        const newConfettiEffect = {
+          id: Date.now(),
+          x: window.innerWidth / 2, // Since all problems are centered
+          y: active.y, // Use the problem's current y position
+          particles: confettiParticles,
+          createdAt: Date.now()
+        };
+        setConfettiEffects(prev => [...prev, newConfettiEffect]);
+
+        // Remove confetti effect after animation
+        setTimeout(() => {
+          setConfettiEffects(current => current.filter(ce => ce.id !== newConfettiEffect.id));
+        }, 1500);
+      }, 150); // Delay score/confetti until after laser animation
+
+      // Remove the problem after a short delay to allow laser to "hit" it first
+      setTimeout(() => {
+        setProblems((prev) => {
+          const newProblems = prev.filter((p) => p.id !== active.id);
+          if (newProblems.length > 0) {
+            newProblems[0].active = true;
+          }
+          return newProblems;
+        });
+      }, 170); // Slightly longer than laser animation
     } else {
       // incorrect: shake input
       const el = document.getElementById("answer-input");

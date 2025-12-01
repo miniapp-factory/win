@@ -3178,3 +3178,33 @@
 
 # 2025-12-01 00:20:14.237268
 +why the confetti and laser beam did not trigger when the problems are being answered
+
+# 2025-12-01 10:45:36.905348
++in the style jsx part can you change the shake animation with this one 
++
++        .shake {
++          animation: shake 0.5s;
++        }
++
++        @keyframes shake {
++          0% { transform: translateX(0); }
++          25% { transform: translateX(-5px); }
++          50% { transform: translateX(5px); }
++          75% { transform: translateX(-5px); }
++          100% { transform: translateX(0); }
++        }
+
+# 2025-12-01 10:45:36.905713
++in the style jsx part can you change the shake animation with this one 
++
++        .shake {
++          animation: shake 0.5s;
++        }
++
++        @keyframes shake {
++          0% { transform: translateX(0); }
++          25% { transform: translateX(-5px); }
++          50% { transform: translateX(5px); }
++          75% { transform: translateX(-5px); }
++          100% { transform: translateX(0); }
++        }

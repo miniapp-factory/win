@@ -3214,3 +3214,89 @@
 
 # 2025-12-01 11:18:15.181122
 +why the animation didnt update when i input wrong answer
+
+# 2025-12-01 12:30:52.735948
++can you replace some react state with this code
++
++  const [operation, setOperation] = useState<"+" | "-" | "*" | "/" | "all">("all");
++  const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("easy");
++  const [problems, setProblems] = useState<Problem[]>([]);
++  const [input, setInput] = useState("");
++  const [score, setScore] = useState(0);
++  const [gameStarted, setGameStarted] = useState(false);
++
++  // --- New states for lives & game over ---
++  const [lives, setLives] = useState(5);
++  const [gameOver, setGameOver] = useState(false);
++
++  // Animation states
++  const [scoreEffects, setScoreEffects] = useState<ScoreEffect[]>([]);
++  const [livesLossEffects, setLivesLossEffects] = useState<LivesLossEffect[]>([]);
++  const [explosionEffects, setExplosionEffects] = useState<ExplosionEffect[]>([]);
++  const [confettiEffects, setConfettiEffects] = useState<ConfettiEffect[]>([]); //New
++  const [laserEffects, setLaserEffects] = useState<LaserEffect[]>([]); //New
++
++  // High scores for each operation and difficulty
++  const [highScores, setHighScores] = useState<Record<string, number>>({
++    "+_easy": 0,
++    "-_easy": 0,
++    "*_easy": 0,
++    "/_easy": 0,
++    "all_easy": 0,
++    "+_medium": 0,
++    "-_medium": 0,
++    "*_medium": 0,
++    "/_medium": 0,
++    "all_medium": 0,
++    "+_hard": 0,
++    "-_hard": 0,
++    "*_hard": 0,
++    "/_hard": 0,
++    "all_hard": 0,
++  });
++
++
++avoid and fix any duplication
+
+# 2025-12-01 12:30:52.736472
++can you replace some react state with this code
++
++  const [operation, setOperation] = useState<"+" | "-" | "*" | "/" | "all">("all");
++  const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("easy");
++  const [problems, setProblems] = useState<Problem[]>([]);
++  const [input, setInput] = useState("");
++  const [score, setScore] = useState(0);
++  const [gameStarted, setGameStarted] = useState(false);
++
++  // --- New states for lives & game over ---
++  const [lives, setLives] = useState(5);
++  const [gameOver, setGameOver] = useState(false);
++
++  // Animation states
++  const [scoreEffects, setScoreEffects] = useState<ScoreEffect[]>([]);
++  const [livesLossEffects, setLivesLossEffects] = useState<LivesLossEffect[]>([]);
++  const [explosionEffects, setExplosionEffects] = useState<ExplosionEffect[]>([]);
++  const [confettiEffects, setConfettiEffects] = useState<ConfettiEffect[]>([]); //New
++  const [laserEffects, setLaserEffects] = useState<LaserEffect[]>([]); //New
++
++  // High scores for each operation and difficulty
++  const [highScores, setHighScores] = useState<Record<string, number>>({
++    "+_easy": 0,
++    "-_easy": 0,
++    "*_easy": 0,
++    "/_easy": 0,
++    "all_easy": 0,
++    "+_medium": 0,
++    "-_medium": 0,
++    "*_medium": 0,
++    "/_medium": 0,
++    "all_medium": 0,
++    "+_hard": 0,
++    "-_hard": 0,
++    "*_hard": 0,
++    "/_hard": 0,
++    "all_hard": 0,
++  });
++
++
++avoid and fix any duplication

@@ -122,15 +122,70 @@ export default function MathRocketDefender() {
     return timeoutId;
   }, []);
 
-  // Generate a random problem
+  // Generate a random problem based on difficulty
   const generateProblem = useCallback(() => {
     const ops = operation === "all" ? ["+", "-", "*", "/"] : [operation];
     const op = ops[Math.floor(Math.random() * ops.length)];
-    let a = Math.floor(Math.random() * 10) + 1;
-    let b = Math.floor(Math.random() * 10) + 1;
-    if (op === "/") {
-      a = a * b;
+
+    // Define number ranges based on difficulty
+    let a, b;
+
+    if (difficulty === "easy") {
+      // Easy: 1-digit vs 1-digit only (1-9 vs 1-9)
+      a = Math.floor(Math.random() * 9) + 1; // 1-9
+      b = Math.floor(Math.random() * 9) + 1; // 1-9
+    } else if (difficulty === "medium") {
+      // Medium: 1-digit vs 2-digit OR 2-digit vs 2-digit
+      const mediumChoice = Math.random();
+      if (mediumChoice < 0.5) {
+        // 1-digit vs 2-digit (1-9 vs 10-99) - randomly decide which is which
+        if (Math.random() < 0.5) {
+          a = Math.floor(Math.random() * 9) + 1; // 1-9
+          b = Math.floor(Math.random() * 90) + 10; // 10-99
+        } else {
+          a = Math.floor(Math.random() * 90) + 10; // 10-99
+          b = Math.floor(Math.random() * 9) + 1; // 1-9
+        }
+      } else {
+        // 2-digit vs 2-digit (10-99 vs 10-99)
+        a = Math.floor(Math.random() * 90) + 10; // 10-99
+        b = Math.floor(Math.random() * 90) + 10; // 10-99
+      }
+    } else {
+      // Hard: 3-digit vs 3-digit (100–999)
+      a = Math.floor(Math.random() * 900) + 100; // 100-999
+      b = Math.floor(Math.random() * 900) + 100; // 100-999
     }
+
+    if (op === "/") {
+      // For division, ensure result is a whole number
+      if (difficulty === "easy") {
+        // For easy division, use 1-digit numbers
+        a = a * b;
+      } else if (difficulty === "medium") {
+        // For medium division - handle both cases appropriately
+        if ((a > 9 && a < 100) && (b > 9 && b < 100)) {
+          // 2-digit vs 2-digit: ensure result is reasonable
+          let divisor = Math.floor(Math.random() * 90) + 10; // 10-99
+          let quotient = Math.floor(Math.random() * 9) + 1; // 1-9
+          a = divisor * quotient;
+          b = divisor;
+        } else {
+          // 1-digit vs 2-digit: adjust for easier problem
+          let divisor = Math.floor(Math.random() * 9) + 1; // 1-9
+          let quotient = Math.floor(Math.random() * 9) + 1; // 1-9
+          a = divisor * quotient;
+          b = divisor;
+        }
+      } else {
+        // For hard division, make it more complex but reasonable
+        let divisor = Math.floor(Math.random() * 90) + 10; // 10-99
+        let quotient = Math.floor(Math.random() * 90) + 10; // 10-99
+        a = divisor * quotient;
+        b = divisor;
+      }
+    }
+
     const value = `${a} ${op} ${b}`;
     const answer = eval(value);
     return {
@@ -140,7 +195,7 @@ export default function MathRocketDefender() {
       y: -50,
       active: false,
     };
-  }, [operation]);
+  }, [operation, difficulty]);
 
   // Add new problem periodically
   useEffect(() => {

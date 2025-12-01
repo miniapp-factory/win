@@ -59,6 +59,7 @@ type LaserEffect = {
 
 export default function MathRocketDefender() {
   const [operation, setOperation] = useState<"+" | "-" | "*" | "/" | "all">("all");
+  const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("easy");
   const [problems, setProblems] = useState<Problem[]>([]);
   const [input, setInput] = useState("");
   const [score, setScore] = useState(0);
@@ -67,18 +68,32 @@ export default function MathRocketDefender() {
   // --- New states for lives & game over ---
   const [lives, setLives] = useState(5);
   const [gameOver, setGameOver] = useState(false);
-  const [highScores, setHighScores] = useState<Record<string, number>>({
-    '+': 0,
-    '-': 0,
-    '*': 0,
-    '/': 0,
-    'all': 0,
-  });
+
+  // Animation states
   const [scoreEffects, setScoreEffects] = useState<ScoreEffect[]>([]);
   const [livesLossEffects, setLivesLossEffects] = useState<LivesLossEffect[]>([]);
   const [explosionEffects, setExplosionEffects] = useState<ExplosionEffect[]>([]);
   const [confettiEffects, setConfettiEffects] = useState<ConfettiEffect[]>([]); //New
   const [laserEffects, setLaserEffects] = useState<LaserEffect[]>([]); //New
+
+  // High scores for each operation and difficulty
+  const [highScores, setHighScores] = useState<Record<string, number>>({
+    "+_easy": 0,
+    "-_easy": 0,
+    "*_easy": 0,
+    "/_easy": 0,
+    "all_easy": 0,
+    "+_medium": 0,
+    "-_medium": 0,
+    "*_medium": 0,
+    "/_medium": 0,
+    "all_medium": 0,
+    "+_hard": 0,
+    "-_hard": 0,
+    "*_hard": 0,
+    "/_hard": 0,
+    "all_hard": 0,
+  });
 
   // Generate a random problem
   const generateProblem = useCallback(() => {

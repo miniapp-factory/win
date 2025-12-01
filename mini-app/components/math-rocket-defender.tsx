@@ -95,6 +95,33 @@ export default function MathRocketDefender() {
     "all_hard": 0,
   });
 
+  // Track active timeouts for cleanup
+  const activeTimeouts = useRef<Set<number>>(new Set());
+  const problemInterval = useRef<NodeJS.Timeout | null>(null);
+
+  // Cleanup function to clear all active timeouts
+  const clearAllTimeouts = useCallback(() => {
+    activeTimeouts.current.forEach(timeoutId => {
+      clearTimeout(timeoutId as any);
+    });
+    activeTimeouts.current.clear();
+
+    if (problemInterval.current) {
+      clearInterval(problemInterval.current);
+      problemInterval.current = null;
+    }
+  }, []);
+
+  // Helper function to track timeouts
+  const setTrackedTimeout = useCallback((callback: () => void, delay: number) => {
+    const timeoutId = window.setTimeout(() => {
+      callback();
+      activeTimeouts.current.delete(timeoutId);
+    }, delay);
+    activeTimeouts.current.add(timeoutId);
+    return timeoutId;
+  }, []);
+
   // Generate a random problem
   const generateProblem = useCallback(() => {
     const ops = operation === "all" ? ["+", "-", "*", "/"] : [operation];

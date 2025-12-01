@@ -396,6 +396,51 @@ export default function MathRocketDefender() {
           <path d="M18,72 Q25,78 32,72 Q25,82 18,72" fill="#EF4444" className="thrust-animation" /> {/* Red-500 */}
         </svg>
       </div>
+      {/* Laser Effects - shoot from rocket to problem */}
+      {laserEffects.map((effect) => (
+        <div
+          key={effect.id}
+          className="absolute pointer-events-none laser-beam"
+          style={{
+            left: '50%',
+            top: `${effect.endY}px`,
+            width: '4px',
+            height: `${effect.startY - effect.endY}px`,
+            backgroundColor: '#3B82F6',
+            transform: 'translateX(-50%)',
+          }}
+        />
+      ))}
+
+      {/* Confetti Effects - appear where problems are solved */}
+      {confettiEffects.map((effect) => (
+        <div
+          key={effect.id}
+          className="absolute pointer-events-none"
+          style={{
+            left: '50%',
+            top: `${effect.y}px`,
+            transform: 'translate(-50%)',
+          }}
+        >
+          {effect.particles.map((particle) => (
+            <div
+              key={particle.id}
+              className="absolute w-2 h-2 rounded-full"
+              style={{
+                backgroundColor: particle.color,
+                left: '0px',
+                top: '0px',
+                width: '8px',
+                height: '8px',
+                animation: `confettiParticleAnimation 1.5s forwards`,
+                '--final-x': `${particle.x}px`,
+                '--final-y': `${particle.y}px`,
+              } as React.CSSProperties}
+            />
+          ))}
+        </div>
+      ))}
 
       {/* Problems */}
       {problems.map((p) => (

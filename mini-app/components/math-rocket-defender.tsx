@@ -59,7 +59,7 @@ type LaserEffect = {
 
 export default function MathRocketDefender() {
   const [operation, setOperation] = useState<"+" | "-" | "*" | "/" | "all">("all");
-  const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("easy");
+  const [difficulty] = useState<"easy" | "medium" | "hard">("easy");
   const [problems, setProblems] = useState<Problem[]>([]);
   const [input, setInput] = useState("");
   const [score, setScore] = useState(0);
@@ -100,20 +100,9 @@ export default function MathRocketDefender() {
   const problemInterval = useRef<NodeJS.Timeout | null>(null);
 
   // Cleanup function to clear all active timeouts
-  const clearAllTimeouts = useCallback(() => {
-    activeTimeouts.current.forEach(timeoutId => {
-      clearTimeout(timeoutId as any);
-    });
-    activeTimeouts.current.clear();
-
-    if (problemInterval.current) {
-      clearInterval(problemInterval.current);
-      problemInterval.current = null;
-    }
-  }, []);
 
   // Helper function to track timeouts
-  const setTrackedTimeout = useCallback((callback: () => void, delay: number) => {
+  const setTrackedTimeout = useCallback((callback: () => void, delay: number): number => {
     const timeoutId = window.setTimeout(() => {
       callback();
       activeTimeouts.current.delete(timeoutId);
@@ -360,7 +349,7 @@ export default function MathRocketDefender() {
         [operation]: score,
       }));
     }
-  }, [score, operation, highScores]);
+  }, [score, operation, highScores, difficulty, setTrackedTimeout]);
 
   // Handle input submission
   const handleSubmit = (e: React.FormEvent) => {

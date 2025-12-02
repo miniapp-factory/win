@@ -1,7 +1,6 @@
 import { generateMetadata } from "@/lib/farcaster-embed";
 export { generateMetadata };
 
-import { description, title } from "@/lib/metadata";
 import MathRocketDefender from "@/components/math-rocket-defender";
 
 export default function Home() {

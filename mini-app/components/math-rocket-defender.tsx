@@ -97,12 +97,12 @@ export default function MathRocketDefender() {
 
   // Track active timeouts for cleanup
   const activeTimeouts = useRef<Set<number>>(new Set());
-  const problemInterval = useRef<NodeJS.Timeout | null>(null);
+  const problemInterval = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // Cleanup function to clear all active timeouts
   const clearAllTimeouts = useCallback(() => {
     activeTimeouts.current.forEach(timeoutId => {
-      clearTimeout(timeoutId as any);
+      clearTimeout(timeoutId);
     });
     activeTimeouts.current.clear();
 
@@ -352,15 +352,6 @@ export default function MathRocketDefender() {
     return () => cancelAnimationFrame(animationFrameId);
   }, [gameStarted]);
 
-  // Update high score whenever score changes for the current operation
-  useEffect(() => {
-    if (score > highScores[operation]) {
-      setHighScores((prev) => ({
-        ...prev,
-        [operation]: score,
-      }));
-    }
-  }, [score, operation, highScores, difficulty, setTrackedTimeout]);
 
   // Handle input submission
   const handleSubmit = (e: React.FormEvent) => {

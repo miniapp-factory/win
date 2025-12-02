@@ -200,7 +200,7 @@ export default function MathRocketDefender() {
   // Add new problem periodically
   useEffect(() => {
     if (!gameStarted) return;
-    const interval = setInterval(() => {
+    problemInterval.current = setInterval(() => {
       setProblems((prev) => {
         const newProblem = {
           ...generateProblem(),
@@ -213,7 +213,12 @@ export default function MathRocketDefender() {
         }));
       });
     }, 2000);
-    return () => clearInterval(interval);
+    return () => {
+      if (problemInterval.current) {
+        clearInterval(problemInterval.current);
+        problemInterval.current = null;
+      }
+    };
   }, [gameStarted, operation, generateProblem]);
 
   // Move problems down
@@ -268,12 +273,12 @@ export default function MathRocketDefender() {
           setExplosionEffects(prev => [...prev, newExplosionEffect]);
 
           // Remove old lives loss effects to avoid memory issues
-          setTimeout(() => {
+          setTrackedTimeout(() => {
             setLivesLossEffects(current => current.filter(effect => effect.id !== newLivesLossEffect.id));
           }, 1000); // Expire after 1 second
 
           // Remove old explosion effects to avoid memory issues
-          setTimeout(() => {
+          setTrackedTimeout(() => {
             setExplosionEffects(current => current.filter(effect => effect.id !== newExplosionEffect.id));
           }, 1000); // Expire after 1 second
 
@@ -281,10 +286,11 @@ export default function MathRocketDefender() {
             const newLives = l - 1;
             if (newLives <= 0) {
               // Update high score before ending the game
-              if (score > highScores[operation]) {
+              const scoreKey = `${operation}_${difficulty}`;
+              if (score > highScores[scoreKey]) {
                 setHighScores(prev => ({
                   ...prev,
-                  [operation]: score
+                  [scoreKey]: score
                 }));
               }
               // Create a final lives loss effect to show game over effect
@@ -303,19 +309,23 @@ export default function MathRocketDefender() {
               };
               setExplosionEffects(prev => [...prev, gameExplosionEffect]);
 
+              // Only set game over after the explosion animation completes
+              setTrackedTimeout(() => {
+                setGameOver(true);
+                setGameStarted(false);
+                setProblems([]);
+              }, 1000); // Wait for explosion animation to complete
+
               // Remove game over effect after delay
-              setTimeout(() => {
+              setTrackedTimeout(() => {
                 setLivesLossEffects(current => current.filter(effect => effect.id !== gameOverEffect.id));
               }, 1000);
 
               // Remove game over explosion effect after delay
-              setTimeout(() => {
+              setTrackedTimeout(() => {
                 setExplosionEffects(current => current.filter(effect => effect.id !== gameExplosionEffect.id));
-              }, 1000);
+              }, 2000); // Keep explosion for a bit longer to allow for visual completion
 
-              setGameOver(true);
-              setGameStarted(false);
-              setProblems([]);
               return 5; // reset lives on game over
             }
             return newLives;

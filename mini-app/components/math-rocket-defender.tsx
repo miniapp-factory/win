@@ -544,7 +544,7 @@ export default function MathRocketDefender() {
       {problems.map((p) => (
         <div
           key={p.id}
-          className={`absolute left-1/2 transform -translate-x-1/2 text-2xl font-bold transition-all duration-300 ${
+          className={`absolute left-1/2 transform -translate-x-1/2 text-2xl md:text-xl tablet-text-lg font-bold transition-all duration-300 ${
             p.active ? "text-orange-400 scale-110" : "text-white"
           }`}
           style={{
@@ -612,8 +612,15 @@ export default function MathRocketDefender() {
             setScore(0);
             setLives(5);
             setGameOver(false);
+            // Reset all effect arrays to prevent visual artifacts
+            setScoreEffects([]);
+            setLivesLossEffects([]);
+            setExplosionEffects([]);
+            setConfettiEffects([]);
+            setLaserEffects([]);
+            clearAllTimeouts(); // Clear all active timeouts
           }}
-          className="absolute top-4 left-4 z-10 text-white bg-transparent border border-white rounded px-2 py-1"
+          className="absolute top-4 left-4 z-10 text-white bg-transparent border border-white rounded px-2 py-1 text-sm tablet-text-base"
         >
           Back
         </button>
@@ -622,8 +629,8 @@ export default function MathRocketDefender() {
       <div className="absolute top-12 right-4 text-xl text-orange-400">
         Score: {score}
       </div>
-      <div className="absolute top-4 right-4 text-xl text-green-400">
-        High Score: {highScores[operation]}
+      <div className="absolute top-4 right-4 text-xl md:text-lg tablet-text-base text-green-400">
+        High Score: {highScores[`${operation}_${difficulty}`]}
       </div>
 
       {/* Lives */}
@@ -650,9 +657,25 @@ export default function MathRocketDefender() {
             <option value="*">Multiplication (*)</option>
             <option value="/">Division (/)</option>
           </select>
+          {/* Difficulty Selector */}
+          <div className="mb-6 flex gap-2 justify-center">
+            <div className={`difficulty-option cursor-pointer px-3 py-1.5 rounded-md transition-all duration-200 text-sm ${difficulty === "easy" ? "bg-blue-600 text-white" : "bg-gray-700 text-gray-300 hover:bg-gray-600"}`}
+                 onClick={() => setDifficulty("easy")}>
+              Easy
+            </div>
+            <div className={`difficulty-option cursor-pointer px-3 py-1.5 rounded-md transition-all duration-200 text-sm ${difficulty === "medium" ? "bg-blue-600 text-white" : "bg-gray-700 text-gray-300 hover:bg-gray-600"}`}
+                 onClick={() => setDifficulty("medium")}>
+              Medium
+            </div>
+            <div className={`difficulty-option cursor-pointer px-3 py-1.5 rounded-md transition-all duration-200 text-sm ${difficulty === "hard" ? "bg-blue-600 text-white" : "bg-gray-700 text-gray-300 hover:bg-gray-600"}`}
+                 onClick={() => setDifficulty("hard")}>
+              Hard
+            </div>
+          </div>
+
           <button
             onClick={() => setGameStarted(true)}
-            className="p-3 rounded bg-blue-600 text-white hover:bg-blue-700"
+            className="p-3 rounded-md bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold text-base hover:from-green-600 hover:to-emerald-600 shadow-lg hover:shadow-xl transition-all duration-300"
           >
             Start Game
           </button>
@@ -661,22 +684,31 @@ export default function MathRocketDefender() {
 
       {/* Game Over overlay */}
       {gameOver && (() => {
-        const effectiveHighScore = score > highScores[operation] ? score : highScores[operation];
+        const scoreKey = `${operation}_${difficulty}`;
+        const effectiveHighScore = score > highScores[scoreKey] ? score : highScores[scoreKey];
         return (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 text-red-500 text-3xl font-bold">
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-80 text-red-500 text-3xl md:text-2xl tablet-text-xl font-bold">
             <div className="mb-4 text-green-400">High Score: {effectiveHighScore}</div>
             <div className="mb-10 text-orange-400">Score: {score}</div>
-            <div className="mb-4 text-5xl font-bold text-red-500">Game Over</div>
+            <div className="mb-4 text-5xl md:text-4xl tablet-text-3xl font-bold text-red-500">Game Over</div>
             <button
-              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm tablet-text-base"
               onClick={() => {
                 // Update high score if current score is higher
-                if (score > highScores[operation]) {
+                if (score > highScores[scoreKey]) {
                   setHighScores(prev => ({
                     ...prev,
-                    [operation]: score
+                    [scoreKey]: score
                   }));
                 }
+                // Clear all active timeouts before restarting
+                clearAllTimeouts();
+                // Reset all effect arrays to prevent visual artifacts
+                setScoreEffects([]);
+                setLivesLossEffects([]);
+                setExplosionEffects([]);
+                setConfettiEffects([]);
+                setLaserEffects([]);
                 setGameStarted(true);
                 setGameOver(false);
                 setLives(5);

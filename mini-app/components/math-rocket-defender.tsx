@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 
 type Problem = {
   id: number;
@@ -59,7 +59,7 @@ type LaserEffect = {
 
 export default function MathRocketDefender() {
   const [operation, setOperation] = useState<"+" | "-" | "*" | "/" | "all">("all");
-  const [difficulty] = useState<"easy" | "medium" | "hard">("easy");
+  const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("easy");
   const [problems, setProblems] = useState<Problem[]>([]);
   const [input, setInput] = useState("");
   const [score, setScore] = useState(0);
@@ -100,6 +100,17 @@ export default function MathRocketDefender() {
   const problemInterval = useRef<NodeJS.Timeout | null>(null);
 
   // Cleanup function to clear all active timeouts
+  const clearAllTimeouts = useCallback(() => {
+    activeTimeouts.current.forEach(timeoutId => {
+      clearTimeout(timeoutId as any);
+    });
+    activeTimeouts.current.clear();
+
+    if (problemInterval.current) {
+      clearInterval(problemInterval.current);
+      problemInterval.current = null;
+    }
+  }, []);
 
   // Helper function to track timeouts
   const setTrackedTimeout = useCallback((callback: () => void, delay: number): number => {
@@ -382,12 +393,12 @@ export default function MathRocketDefender() {
       setLaserEffects(prev => [...prev, newLaserEffect]);
 
       // Remove laser effect after animation (short duration)
-      setTimeout(() => {
+      setTrackedTimeout(() => {
         setLaserEffects(current => current.filter(le => le.id !== newLaserEffect.id));
       }, 150); // Laser animation is fast
 
       // Add score effect after laser hits the problem
-      setTimeout(() => {
+      setTrackedTimeout(() => {
         setScore((s) => s + 1);
 
         // Add score effect at the score indicator position (top-right)
@@ -401,7 +412,7 @@ export default function MathRocketDefender() {
         setScoreEffects(prev => [...prev, newScoreEffect]);
 
         // Remove score effect after animation
-        setTimeout(() => {
+        setTrackedTimeout(() => {
           setScoreEffects(current => current.filter(se => se.id !== newScoreEffect.id));
         }, 1000);
 
@@ -433,13 +444,13 @@ export default function MathRocketDefender() {
         setConfettiEffects(prev => [...prev, newConfettiEffect]);
 
         // Remove confetti effect after animation
-        setTimeout(() => {
+        setTrackedTimeout(() => {
           setConfettiEffects(current => current.filter(ce => ce.id !== newConfettiEffect.id));
         }, 1500);
       }, 150); // Delay score/confetti until after laser animation
 
       // Remove the problem after a short delay to allow laser to "hit" it first
-      setTimeout(() => {
+      setTrackedTimeout(() => {
         setProblems((prev) => {
           const newProblems = prev.filter((p) => p.id !== active.id);
           if (newProblems.length > 0) {
@@ -452,7 +463,7 @@ export default function MathRocketDefender() {
       // incorrect: shake input
       const el = document.getElementById("answer-input");
       if (el) el.classList.add("shake");
-      setTimeout(() => {
+      setTrackedTimeout(() => {
         if (el) el.classList.remove("shake");
       }, 500);
     }

@@ -62,6 +62,8 @@ export default function MathRocketDefender() {
   const [difficulty, setDifficulty] = useState<"easy" | "medium" | "hard">("easy");
   const [problems, setProblems] = useState<Problem[]>([]);
   const [input, setInput] = useState("");
+  const [showKeyboard, setShowKeyboard] = useState(false);
+  const isMobileDevice = typeof window !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   const [score, setScore] = useState(0);
   const [gameStarted, setGameStarted] = useState(false);
 
@@ -227,12 +229,12 @@ export default function MathRocketDefender() {
     let animationFrameId: number;
     const animation = () => {
       // Calculate the actual height of the game container
-      const gameContainer = document.querySelector('.h-\\[calc\\(100vh-64px\\)\\]') as HTMLElement;
+      const gameContainer = document.querySelector('.h-\\[calc\\(100vh-120px\\)\\]') as HTMLElement;
       const gameHeight = gameContainer ? gameContainer.clientHeight : window.innerHeight * 0.8;
 
       // The rocket is positioned with bottom-16 (64px from bottom) and has height 80px
       // So the tip of the rocket (where collision happens) is at: gameHeight - 64px - 80px = gameHeight - 144px
-      const rocketTopY = gameHeight - 64 - 80; // gameHeight - bottom_offset - rocket_height
+      const rocketTopY = gameHeight - 96 - 80; // gameHeight - bottom_offset - rocket_height
 
       // Track if we already lost a life in this frame
       let didLoseLife = false;
@@ -370,7 +372,7 @@ export default function MathRocketDefender() {
       // Calculate game container height to determine rocket position
       const gameContainer = document.querySelector('.h-\\[calc\\(100vh-64px\\)\\]') as HTMLElement;
       const gameHeight = gameContainer ? gameContainer.clientHeight : window.innerHeight * 0.8;
-      const rocketY = gameHeight - 64 - 80; // Rocket bottom position minus full rocket height (80px), so we get the top
+      const rocketY = gameHeight - 96 - 80; // Rocket bottom position minus full rocket height (80px), so we get the top
 
       // Add laser effect from rocket head to problem
       const newLaserEffect = {
@@ -459,15 +461,40 @@ export default function MathRocketDefender() {
       }, 500);
     }
     setInput("");
+  };  // end of handleSubmit
+
+  // Handle digit input
+  const handleDigitInput = (digit: string) => {
+    setInput(prev => prev + digit);
+  };
+
+  // Handle backspace
+  const handleBackspace = () => {
+    setInput(prev => prev.slice(0, -1));
+  };
+
+  // Handle negative sign
+  const handleNegative = () => {
+    if (input === '') {
+      setInput('-');
+    }
+  };
+
+  // Handle submit
+  const handleSubmitCustom = () => {
+    // Call the original handleSubmit function
+    const submitEvent = { preventDefault: () => {} } as React.FormEvent;
+    handleSubmit(submitEvent);
+    // Keep the keyboard open after submission
   };
 
   return (
-    <div className="relative w-full mx-auto max-w-4xl h-[calc(100vh-64px)] bg-black text-white overflow-hidden">
+    <div className="relative w-full mx-auto max-w-4xl h-[calc(100vh-120px)] bg-black text-white overflow-hidden">
       {/* Space background */}
       <div className="absolute inset-0 bg-gradient-to-b from-indigo-900 to-black"></div>
 
       {/* Rocket */}
-      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
+      <div className="absolute bottom-24 left-1/2 transform -translate-x-1/2">
         <svg
           width="50"
           height="80"
@@ -564,7 +591,7 @@ export default function MathRocketDefender() {
           className="absolute pointer-events-none animate-explosion"
           style={{
             left: '50%',
-            bottom: '90px',
+            bottom: '120px',
             transform: 'translate(-50%, 50%)',
           }}
         >
@@ -588,20 +615,105 @@ export default function MathRocketDefender() {
         </div>
       ))}
 
-      <form
-        onSubmit={handleSubmit}
-        className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2"
-      >
-        <input
-          id="answer-input"
-          type="text"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          placeholder="Answer"
-          autoComplete="off"
-          className="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-blue-500 transition-all duration-300 ease-in-out"
-        />
-      </form>
+      {/* Input */}
+      {isMobileDevice ? (
+        <>
+          {/* Hidden input for form submission */}
+          <input
+            id="answer-input"
+            type="text"
+            value={input}
+            readOnly
+            className="absolute opacity-0 w-0 h-0"
+            aria-hidden="true"
+          />
+          {/* Hidden input for form submission */}
+          <input
+            id="answer-input"
+            type="text"
+            value={input}
+            readOnly
+            className="absolute opacity-0 w-0 h-0"
+            aria-hidden="true"
+          />
+          {/* Show a button to open the keyboard on mobile */}
+          <div
+            className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2 cursor-pointer z-10"
+            onClick={() => setShowKeyboard(true)}
+          >
+            <input
+              type="text"
+              value={input}
+              readOnly
+              placeholder={input ? "Tap to edit answer" : "Tap to open keyboard"}
+              className="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-blue-500 transition-all duration-300 ease-in-out"
+            />
+          </div>
+          {/* Show keyboard if explicitly shown */}
+          {showKeyboard && (
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-11/12 max-w-[90%] bg-gray-800 p-1 rounded-t-none rounded-b-lg shadow-lg z-30">
+              <div className="flex justify-between mb-1">
+                <div className="flex-1 p-2 bg-gray-700 rounded text-center text-white overflow-x-auto whitespace-nowrap">
+                  {input || "Enter answer..."}
+                </div>
+                <button
+                  onClick={() => setShowKeyboard(false)}
+                  className="text-white text-base w-5 h-5 flex items-center justify-center hover:bg-gray-700 rounded ml-1"
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="flex justify-between gap-1 mb-1">
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(num => (
+                  <button
+                    key={num}
+                    onClick={() => handleDigitInput(num.toString())}
+                    className="bg-gray-700 text-white p-1 rounded text-xs hover:bg-gray-600 active:bg-gray-500 flex-1"
+                  >
+                    {num}
+                  </button>
+                ))}
+              </div>
+              <div className="flex justify-between gap-1">
+                <button
+                  onClick={handleNegative}
+                  className="bg-gray-700 text-white p-1.5 rounded text-sm hover:bg-gray-600 active:bg-gray-500 flex-1 text-center"
+                >
+                  -
+                </button>
+                <button
+                  onClick={handleBackspace}
+                  className="bg-red-600 text-white p-1.5 rounded text-sm hover:bg-red-500 active:bg-red-400 flex-1 text-center"
+                >
+                  ⌫
+                </button>
+                <button
+                  onClick={handleSubmitCustom}
+                  className="bg-green-600 text-white p-1.5 rounded text-sm hover:bg-green-500 active:bg-green-400 flex-1 text-center"
+                >
+                  ✓
+                </button>
+              </div>
+            </div>
+          )}
+        </>
+      ) : (
+        // Desktop: Keep the original form with input
+        <form
+          onSubmit={handleSubmit}
+          className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1/2"
+        >
+          <input
+            id="answer-input"
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Answer"
+            autoComplete="off"
+            className="w-full p-2 rounded bg-gray-800 text-white border border-gray-600 focus:outline-none focus:border-blue-500 transition-all duration-300 ease-in-out"
+          />
+        </form>
+      )}
 
       {/* Back button – visible only while the game is active */}
       {gameStarted && !gameOver && (
@@ -640,7 +752,7 @@ export default function MathRocketDefender() {
 
       {/* Start button & operation selection */}
       {!gameStarted && !gameOver && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
+        <div className="absolute inset-0 flex flex-col items-center justify-start pt-16">
           <h1 className="text-5xl mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Math Blast</h1>
           <p className="text-lg mb-4 text-center text-gray-300">A playful 2D math shooter where rockets hit falling math questions.</p>
           <label className="mb-2 text-lg">Choose your Operation</label>

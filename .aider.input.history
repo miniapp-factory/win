@@ -4658,3 +4658,97 @@
 
 # 2025-12-05 13:27:09.215319
 +Implement the last 4 commits I made today in the math-rocket-defender.tsx file. Do not change anything else. Use the code and updates exactly as in those commits, including all state, mobile keyboard handling, input form changes, rocket positioning, game container height, explosion effect positions, start screen adjustments, and collision detection updates.
+
+# 2025-12-05 14:04:19.830947
++can you add this inside the style jsx. only add this, dont make any changes.
++
++        /* Difficulty option button styles */
++        .difficulty-option {
++          min-width: 60px;
++          text-align: center;
++          font-weight: 500;
++          cursor: pointer;
++          border: 2px solid transparent;
++        }
++
++        .difficulty-option.active {
++          border-color: #3B82F6;
++          background-color: #3B82F6;
++          color: white;
++        }
++
++        @media (max-width: 1000px) {
++          .tablet-text-base {
++            font-size: 1rem;
++          }
++          .tablet-text-lg {
++            font-size: 1.125rem;
++          }
++          .tablet-text-xl {
++            font-size: 1.25rem;
++          }
++          .tablet-text-2xl {
++            font-size: 1.5rem;
++          }
++          .tablet-text-3xl {
++            font-size: 1.875rem;
++          }
++          .tablet-text-4xl {
++            font-size: 2.25rem;
++          }
++        }
++
++        @media (max-width: 640px) {
++          .difficulty-option {
++            min-width: 50px;
++            padding: 6px 10px;
++            font-size: 0.8rem;
++          }
++        }
+
+# 2025-12-05 14:04:19.831417
++can you add this inside the style jsx. only add this, dont make any changes.
++
++        /* Difficulty option button styles */
++        .difficulty-option {
++          min-width: 60px;
++          text-align: center;
++          font-weight: 500;
++          cursor: pointer;
++          border: 2px solid transparent;
++        }
++
++        .difficulty-option.active {
++          border-color: #3B82F6;
++          background-color: #3B82F6;
++          color: white;
++        }
++
++        @media (max-width: 1000px) {
++          .tablet-text-base {
++            font-size: 1rem;
++          }
++          .tablet-text-lg {
++            font-size: 1.125rem;
++          }
++          .tablet-text-xl {
++            font-size: 1.25rem;
++          }
++          .tablet-text-2xl {
++            font-size: 1.5rem;
++          }
++          .tablet-text-3xl {
++            font-size: 1.875rem;
++          }
++          .tablet-text-4xl {
++            font-size: 2.25rem;
++          }
++        }
++
++        @media (max-width: 640px) {
++          .difficulty-option {
++            min-width: 50px;
++            padding: 6px 10px;
++            font-size: 0.8rem;
++          }
++        }

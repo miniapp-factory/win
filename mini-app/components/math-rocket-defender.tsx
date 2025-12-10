@@ -940,7 +940,50 @@ export default function MathRocketDefender() {
             box-shadow: 0 0 8px #3B82F6, 0 0 16px #3B82F6;
           }
         }
-      `}</style>
+        /* Difficulty option button styles */
+        .difficulty-option {
+          min-width: 60px;
+          text-align: center;
+          font-weight: 500;
+          cursor: pointer;
+          border: 2px solid transparent;
+        }
+
+        .difficulty-option.active {
+          border-color: #3B82F6;
+          background-color: #3B82F6;
+          color: white;
+        }
+
+        @media (max-width: 1000px) {
+          .tablet-text-base {
+            font-size: 1rem;
+          }
+          .tablet-text-lg {
+            font-size: 1.125rem;
+          }
+          .tablet-text-xl {
+            font-size: 1.25rem;
+          }
+          .tablet-text-2xl {
+            font-size: 1.5rem;
+          }
+          .tablet-text-3xl {
+            font-size: 1.875rem;
+          }
+          .tablet-text-4xl {
+            font-size: 2.25rem;
+          }
+        }
+
+        @media (max-width: 640px) {
+          .difficulty-option {
+            min-width: 50px;
+            padding: 6px 10px;
+            font-size: 0.8rem;
+          }
+        }
+        `}</style>
     </div>
   );
 }

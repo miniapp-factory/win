@@ -738,7 +738,7 @@ export default function MathRocketDefender() {
         </button>
       )}
       {/* Score */}
-      <div className="absolute top-12 right-4 text-xl text-orange-400">
+      <div className="absolute top-12 right-4 text-xl md:text-lg tablet-text-base text-orange-400">
         Score: {score}
       </div>
       <div className="absolute top-4 right-4 text-xl md:text-lg tablet-text-base text-green-400">
@@ -746,13 +746,13 @@ export default function MathRocketDefender() {
       </div>
 
       {/* Lives */}
-      <div className="absolute top-12 left-4 text-xl text-red-500">
+      <div className="absolute top-12 left-4 text-xl md:text-lg tablet-text-base text-red-500">
         Lives: {lives}
       </div>
 
       {/* Start button & operation selection */}
       {!gameStarted && !gameOver && (
-        <div className="absolute inset-0 flex flex-col items-center justify-start pt-16">
+        <div className="absolute inset-0 flex flex-col items-center justify-start pt-30">
           <h1 className="text-5xl mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Math Blast</h1>
           <p className="text-lg mb-4 text-center text-gray-300">A playful 2D math shooter where rockets hit falling math questions.</p>
           <label className="mb-2 text-lg">Choose your Operation</label>

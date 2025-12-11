@@ -753,15 +753,15 @@ export default function MathRocketDefender() {
       {/* Start button & operation selection */}
       {!gameStarted && !gameOver && (
         <div className="absolute inset-0 flex flex-col items-center justify-start pt-30">
-          <h1 className="text-5xl mb-2 font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Math Blast</h1>
-          <p className="text-lg mb-4 text-center text-gray-300">A playful 2D math shooter where rockets hit falling math questions.</p>
+          <h1 className="text-5xl mb-2 font-bold -mt-10 text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-500">Math Blast</h1>
+          <p className="text-lg mb-6 text-center text-gray-300">A playful 2D math shooter where rockets hit falling math questions.</p>
           <label className="mb-2 text-lg">Choose your Operation</label>
           <select
             value={operation}
             onChange={(e) =>
               setOperation(e.target.value as "+" | "-" | "*" | "/" | "all")
             }
-            className="mb-4 p-2 rounded bg-gray-800 text-white border border-gray-600"
+            className="mb-6 p-2 rounded bg-gray-800 text-white border border-gray-600"
           >
             <option value="all">All</option>
             <option value="+">Addition (+)</option>
